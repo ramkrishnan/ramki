@@ -1,0 +1,136 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ZAnalytics JS API</title>
+    <link rel="icon" type="image/x-icon" href="https://analytics.zoho.com/favicon.ico">
+    <script src="https://downloads.zohocdn.com/zanalyticslib/jsapi/v1/zanalytics.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+        }
+        input, select, button {
+            background: #fff;
+            border-radius: 3px;
+            border: 1px solid #b8b8b8;
+            height: 30px;
+            margin: 5px;
+            padding-inline: 7px;
+        }
+        input[type="date"], select {
+            width: 150px;
+        }
+        input[type="range"] {
+            width: 150px;
+        }
+        button {
+            cursor: pointer;
+        }
+
+        .zrop-userFilter {
+            display: flex;
+            gap: 25px;
+            padding: 5px 15px;
+            margin: 0;
+            background-color: #fffce7;
+        }
+    </style>
+</head>
+<body>
+<div class="zrop-userFilter__holder">
+    <div class="zrop-userFilter">
+        <div class="zrop-userFilter__label">
+            <label>Date: </label><input type="date" id="dateFilter">
+        </div>
+        <div class="zrop-userFilter__label">
+            <label>Region: </label>
+            <select id="regionFilter">
+                <option value='None'>Select</option>
+                <option value='Central'>Central</option>
+                <option value="East">East</option>
+                <option value="West">West</option>
+            </select>
+        </div>
+        <div class="zrop-userFilter__label">
+            <label>Product Category: </label>
+            <select id="productCategory">
+                <option value='None'>Select</option>
+                <option value='Furniture'>Furniture</option>
+                <option value="Grocery">Grocery</option>
+                <option value="Stationery">Stationary</option>
+            </select>
+        </div>
+        <div class="zrop-userFilter__label">
+            <label>Cost: </label><input type="range" id="costFilter" min="119000" max="300000" value="125000">
+        </div>
+    </div>
+    <div id="reportView"></div>
+</div>
+
+<div class="zrop-userFilter__holder">
+    <div class="zrop-userFilter">
+        <div class="zrop-userFilter__label">
+            <label>Region: </label>
+            <select id="regionFilter2">
+                <option value='None'>Select</option>
+                <option value='Central'>Central</option>
+                <option value="East">East</option>
+                <option value="West">West</option>
+            </select>
+        </div>
+    </div>
+    <div id="reportView2"></div>
+</div>
+
+<script>
+    const reportDiv = document.getElementById("reportView");
+    const reportUrl = "https://analytics.zoho.com/open-view/789037000001911505";
+    const reportOptions = {
+        width: '100%',
+        height: 400
+    };
+    const vizObj = new ZAnalyticsLib(reportDiv, reportUrl, reportOptions);
+    vizObj.createViz();
+
+
+    const reportDiv2 = document.getElementById("reportView2");
+    const reportUrl2 = "https://analytics.zoho.com/open-view/2588560000000102021/a492ca0193d7b3962f31d3326069d91a";
+    const reportOptions2 = {
+        width: '100%',
+        height: 400
+    };
+    const vizObj2 = new ZAnalyticsLib(reportDiv2, reportUrl2, reportOptions2);
+    vizObj2.createViz();
+
+    document.getElementById("dateFilter").onchange = function() {
+        if (!this.value) {
+            vizObj.applyUserFilter('Date', 'RESET');
+        } else {
+            const date = new Date(this.value);
+            const day = String(date.getDate()).padStart(2, '0');
+            const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const formattedDate = `${day} ${monthNames[date.getMonth()]} ${date.getFullYear()} 00:00:00`;
+            vizObj.applyUserFilter('Date', { to: formattedDate });
+        }
+    };
+
+    document.getElementById("regionFilter").onchange = function() {
+        vizObj.applyUserFilter('Region', this.value === 'None' ? 'RESET' : this.value);
+        vizObj2.applyUserFilter('Region', this.value === 'None' ? 'RESET' : this.value);
+    };
+
+    document.getElementById("regionFilter2").onchange = function() {
+        vizObj.applyUserFilter('Region', this.value === 'None' ? 'RESET' : this.value);
+        vizObj2.applyUserFilter('Region', this.value === 'None' ? 'RESET' : this.value);
+    };
+
+    document.getElementById("productCategory").onchange = function() {
+        vizObj.applyUserFilter('Product Category', this.value === 'None' ? 'RESET' : this.value);
+    };
+
+    document.getElementById("costFilter").onchange = function() {
+        vizObj.applyUserFilter('Cost', { from: this.min, to: this.value });
+    };
+</script>
+</body>
+</html>
