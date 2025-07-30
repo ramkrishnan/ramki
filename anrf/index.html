@@ -137,6 +137,7 @@
             margin: 0 50px;
             align-items: flex-start;
             justify-content: space-between;
+            overflow-x: auto;
         }
         .tab-container {
             font-family: Arial, sans-serif;
@@ -199,12 +200,23 @@
             object-fit: contain;
             cursor: pointer;
         }
-
-
-
-        @media (max-width: 1024px) {
+        @media (max-width: 768px) {
             .anrf-rt-section {
              display: none;
+            }
+            .anrf-font-gradient {
+                display: none;
+            }
+            .anrf-lt-section {
+                padding: 20px 30px;
+            }
+        }
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .anrf-rt-section {
+             display: none;
+            }
+            .anrf-lt-section {
+                padding: 40px 50px;
             }
         }
         @media (min-width: 1025px) and (max-width: 1440px) {
