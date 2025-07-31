@@ -164,6 +164,9 @@
             line-height: 1.5;
             transition: background-color 0.3s;
         }
+        .anrf-tab.anrf-tab-newsFeed {
+            cursor: default;
+        }
         .anrf-tab:hover {
             background-color: #e0e0e0;
         }
@@ -192,6 +195,9 @@
             object-fit: contain;
             cursor: pointer;
         }
+        .anrf-tab-newsFeed:hover .social-icons img {
+            cursor: pointer;
+        }
         .anrf-tab-newsFeed {
             display: flex;
             align-items: center;
@@ -214,6 +220,9 @@
         .anrf-button-label {
             word-break: keep-all;
             white-space: nowrap;
+        }
+        .anrf-tab-newsFeed:hover .anrf-button-label {
+            margin-inline-start: 10px;
         }
         @media (max-width: 768px) {
             .anrf-rt-section {
