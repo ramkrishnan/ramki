@@ -32,31 +32,28 @@
             font-style: normal;
             font-display: swap;
         }
+
+        @font-face {
+            font-family: 'Zoho_Puvi_Semibold';
+            src: url('https://static.zohocdn.com/zohofonts/zohopuvi/4.0/Zoho_Puvi_Semibold.woff2') format('woff2');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        }
         body {
             margin: 0;
-            font-family: 'Zoho_Puvi_Regular', sans-serif;
         }
         .anrf-banner {
             background: linear-gradient(to right, #112854 44%, #1290FF 100%);
-            overflow: hidden;
         }
         .anrf-lt-section {
-            padding: 40px 0 40px 50px;
-        }
-        .anrf-rt-section {
-            flex: 0 0 57%;
-            margin-left: -5%;
-            background-image: url('images/right-img.svg');
-            background-repeat: no-repeat;
-            background-position: right bottom;
-            background-size: contain;
+            padding: 40px 0 65px 40px;
         }
         .anrf-logo-section {
             margin: 0;
         }
         .anrf-logo-section img {
             max-width: 300px;
-            min-width: 275px;
         }
         .anrf-header__title {
             color: #ffffff;
@@ -77,14 +74,86 @@
             font-weight: bold;
             font-style: italic;
         }
+        /* .anrf-banner__bg {
+            background: url(banner-rt-img.svg) right bottom no-repeat;
+        } */
+        .anrf-rt-section {
+            position: relative;
+            flex-grow: 1;
+            
+        }
+        .anrf-rt-section::before {
+            content: '';
+            position: absolute;
+            z-index: 3;
+            width: 100%;
+            height: 100%;
+            background: url(right-img.svg) right bottom no-repeat;
+        }
         .anrf-banner__content {
             display: flex;
             justify-content: space-between;
-            background-image: url('images/banner-center-img.png');
+            background-image: url('banner-center-img.svg');
             background-repeat: no-repeat;
-            background-size: auto 80%;
-            background-position: 45% top;
+            background-size: auto 250px;
+            background-position: 45% 0%;
         }
+        .anrf-wave-labels {
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+            align-items: self-end;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        .anrf-wave-labels li {
+            color: #ffffff;
+            font-family: 'Zoho_Puvi_Regular', sans-serif;
+            font-size: 12px;
+            text-align: center;
+            line-height: 1.3;
+            pointer-events: auto;
+        }
+        .anrf-wave-labels li::after {
+            content: "";
+            display: block;
+            width: 4px;
+            height: 60px;
+            margin: 8px auto 0;
+            background: linear-gradient(to bottom,
+                #DCCBCB 0%,
+                #FFC776 36%,
+                transparent 100%
+            );
+        }
+        .anrf-wave-labels li:hover::after {
+            content: "";
+            display: block;
+            width: 4px;
+            height: 60px;
+            margin: 8px auto 0;
+            background: linear-gradient(to bottom,
+                #DCCBCB 0%,
+                #9FD681 36%,
+                transparent 100%
+            );
+        }
+        .anrf-wave-labels li a {
+            color: #ffffff;
+            text-decoration: none;
+            cursor: pointer;
+            position: relative;
+            z-index: 5;
+        }
+        .anrf-wave-labels li a:hover {
+            color: #FFC849;
+        }
+
+
+
+
+
         .anrf-font-gradient {
             margin: 10px 20px;
         }
@@ -94,7 +163,7 @@
             align-items: center;
             background: #e9e9ec;
             font-family: 'Zoho_Puvi_Regular';
-            padding: 20px 0px 20px 50px;
+            padding: 20px 0px 20px 20px;
         }
         .anrf-news-label {
             font-family: 'Zoho_Puvi_ExtraBold', sans-serif;
@@ -117,13 +186,53 @@
             display: inline-block;
             white-space: nowrap;
             animation: scroll-left 25s linear infinite;
+            animation-play-state: running;
+        }
+        .anrf-news:hover .anrf-news-content,
+        .anrf-news-content:hover,
+        .anrf-news-content:focus-within {
+            animation-play-state: paused;
         }
         .anrf-news-item {
-            color: #324775;
             display: inline-block;
             padding-right: 60px;
-            white-space: nowrap;
         }
+        .anrf-news-item a {
+            font-family: 'Zoho_Puvi_Semibold';
+            color: #324775;
+            text-decoration: none;
+            position: relative;
+            white-space: nowrap;
+            padding-left: 15px;
+        }
+        .anrf-news-item a::before{
+            content:"";
+            position:absolute;
+            inset-block-start: 50%;
+            inset-inline-start: 0;
+            transform: translateY(-50%);
+            inline-size: 0;
+            block-size: 0;
+            border-block-start: 4px solid transparent;
+            border-block-end: 4px solid transparent;
+            border-inline-start: 6px solid #324775;
+            pointer-events:none;
+            transition: opacity .2s;
+        }
+
+        .anrf-news-item a:hover::before,
+        .anrf-news-item a:focus-visible::before{
+            opacity:.8;
+        }
+
+            /* RTL support */
+        [dir="rtl"] .anrf-news-item a::before{
+            border-inline-start: 0;
+            border-inline-end: 8px solid #324775;
+            inset-inline-start: auto;
+            inset-inline-end: 0;
+        }
+        
         @keyframes scroll-left {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
@@ -224,6 +333,39 @@
         .anrf-tab-newsFeed:hover .anrf-button-label {
             margin-inline-start: 10px;
         }
+        
+
+
+
+
+
+        .anrf-wave-labels {
+            justify-content: flex-start;
+            gap: 40px;
+        }
+        .anrf-rt-section {
+            flex: 0 0 57%;
+            margin-left: -5%;
+        }
+        .anrf-wave-labels {
+            margin-inline: calc(6% + 70px) 50px;
+        }
+        .anrf-wave-labels li:nth-child(1) {
+            margin-block-end: 60px;
+        }
+        .anrf-wave-labels li:nth-child(2) {
+            margin-block-end: 125px;
+        }
+        .anrf-wave-labels li:nth-child(3) {
+            margin-block-end: 130px;
+        }
+        .anrf-wave-labels li:nth-child(4) {
+            margin-block-end: 145px;
+        }
+        .anrf-wave-labels li:nth-child(5) {
+            margin-block-end: 185px;
+        }
+
         @media (max-width: 768px) {
             .anrf-rt-section {
              display: none;
@@ -240,13 +382,19 @@
             .anrf-tab-holder {
                 margin: 0 20px;
             }
+            .anrf-header__title, .anrf-header__desc {
+                text-align: center;
+            }
+            .anrf-news-label {
+                margin-left: -15px;
+            }
         }
         @media (min-width: 769px) and (max-width: 1024px) {
-            .anrf-rt-section {
+            /* .anrf-rt-section {
              display: none;
-            }
+            } */
             .anrf-lt-section {
-                padding: 40px 50px;
+                padding: 40px 50px 0;
             }
             .anrf-news-wrapper {
                 padding: 20px 0px 20px 20px;
@@ -254,19 +402,59 @@
             .anrf-tab-holder {
                 margin: 0 20px;
             }
+            .anrf-banner__content {
+                flex-direction: column;
+            }
+            .anrf-wave-labels {
+                justify-content: space-evenly;
+                gap: 40px;
+            }
+            .anrf-wave-labels li:nth-child(1) {
+                margin-block-end: 50px;
+            }
+            .anrf-wave-labels li:nth-child(2) {
+                margin-block-end: 125px;
+            }
+            .anrf-wave-labels li:nth-child(3) {
+                margin-block-end: 130px;
+            }
+            .anrf-wave-labels li:nth-child(4) {
+                margin-block-end: 145px;
+            }
+            .anrf-wave-labels li:nth-child(5) {
+                margin-block-end: 185px;
+            }
         }
         @media (min-width: 1025px) and (max-width: 1440px) {
             .anrf-rt-section {
-                flex: 0 0 52%;
+                flex: 0 0 60%;
             }
             .anrf-header__title {
                 font-size: 30px;
             }
+            .anrf-wave-labels {
+                gap: 20px;
+            }
+            .anrf-wave-labels li:nth-child(1) {
+                margin-block-end: 60px;
+            }
+            .anrf-wave-labels li:nth-child(2) {
+                margin-block-end: 90px;
+            }
+            .anrf-wave-labels li:nth-child(3) {
+                margin-block-end: 95px;
+            }
+            .anrf-wave-labels li:nth-child(4) {
+                margin-block-end: 110px;
+            }
+            .anrf-wave-labels li:nth-child(5) {
+                margin-block-end: 150px;
+            }
         }
         @media (min-width: 1441px) and (max-width: 1710px) {
-            .anrf-rt-section {
+            /* .anrf-rt-section {
                 flex: 0 0 47%;
-            }
+            } */
         }
     </style>
 </head>
@@ -277,7 +465,7 @@
                 <div class="anrf-banner__content">
                     <div class="anrf-lt-section">
                     <div class="anrf-logo-section">
-                        <img src="images/logo.svg" />
+                        <img src="logo.svg" />
                     </div>
                     <h1 class="anrf-header__title">
                         <span class="anrf-title__green">ANU</span>SANDHAN <span class="anrf-title__green">MA</span>STER <span class="anrf-title__green">P</span>LATFORM OF <span class="anrf-title__green">I</span>NDIAN <br><span class="anrf-title__yellow">RESEARCH AND INNOVATION</span>
@@ -285,10 +473,24 @@
                     <h2 class="anrf-header__desc anrf-title__green">ANUMAPI</h2>
                 </div>
                 <div class="anrf-rt-section">
-                    <div class="anrf-rt-img-holder">
-                    </div>
-                    
-                </div>
+    <ul class="anrf-wave-labels">
+        <li>
+            <a target="_blank" href="https://www.anrfonline.in/ANRF/maha_Instructions?HomePage=New">Mission for Advancement in<br>High-impact Areas (MAHA)</a>
+        </li>
+        <li>
+            <a target="_blank" href="https://www.anrfonline.in/ANRF/seminar_symposia">Seminar/<br>Symposia (SSY)</a>
+        </li>
+        <li>
+            <a target="_blank" href="https://www.anrfonline.in/ANRF/ecrg_anrf?HomePage=New">Prime Minister Early<br>Career Research Grant</a>
+        </li>
+        <li>
+            <a target="_blank" href="https://www.anrfonline.in/ANRF/jcbose_anrf">J. C. Bose <br>Grant (JBG)</a>
+            </li>
+        <li>
+            <a target="_blank" href="https://www.anrfonline.in/ANRF/its">International<br>Travel Scheme (ITS)</a>
+        </li>
+    </ul>
+</div>
                 </div>
             </div>
         </div>
@@ -299,10 +501,15 @@
   <div class="anrf-news-container">
     <div class="anrf-news-track">
       <div class="anrf-news-content">
-        <span class="anrf-news-item">▶ The Office of the PSA Invites for Logo Design Contest for S&amp;T Clusters (Last Date to Apply: 15th July 2025)</span>
-        <span class="anrf-news-item">▶ IndiaAI Mission Seeks Suggestions for AI Impact Summit 2026 (Last Date is 30 June)</span>
-        <span class="anrf-news-item">▶ The Office of the PSA Invites for Logo Design Contest for S&amp;T Clusters (Last Date to Apply: 15th July 2025)</span>
-        <span class="anrf-news-item">▶ IndiaAI Mission Seeks Suggestions for AI Impact Summit 2026 (Last Date is 30 June)</span>
+        <span class="anrf-news-item"><a target="_blank" href="https://www.indiascienceandtechnology.gov.in/programme-schemes/research-and-development/anrf-prime-minister-professorship-program">ANRF- Prime Minister Professorship Program (Last Date to Apply: 1 Sept. 2025)</a></span>
+        <span class="anrf-news-item"><a target="_blank" href="https://www.inspireawards-dst.gov.in/">INSPIRE-MANAK Call for Nominations for Students’ Technological Ideas/Innovations (Last date to Apply: 15th September 2025)</a></span>
+        <span class="anrf-news-item"><a target="_blank" href="https://psa.gov.in/CMS/web/sites/default/files/psa_custom_files/EOI%20for%20logo_27062025.pdf">Office of the PSA Invites for Logo Design Contest for S&T Clusters (Last Date to Apply: 15th July 2025)</a></span>
+        <span class="anrf-news-item"><a target="_blank" href="https://www.mygov.in/group-issue/public-consultation-help-shape-ai-impact-summit-2026/">IndiaAI Mission Seeks Suggestions for AI Impact Summit 2026 (Last Date is 30 June 2025)</a></span>
+        <span class="anrf-news-item"><a target="_blank" href="https://www.indiascienceandtechnology.gov.in/internships/nif-student-internship-programme-scouting-and-documentation-grassroots-innovations-gris">NIF-Student Internship Programme for Scouting and Documentation of Grassroots Innovations (GRIs)</a></span>
+        <span class="anrf-news-item"><a target="_blank" href="https://www.indiascienceandtechnology.gov.in/nurturing-minds/scholarships/iit-bombay-institute-post-doctoral-fellowship-ipdf">IIT Bombay- Institute Post- Doctoral Fellowship (IPDF)</a></span>
+        <span class="anrf-news-item"><a target="_blank" href="https://www.indiascienceandtechnology.gov.in/programme-schemes/human-resource-and-development/star-college-scheme">Star College Scheme</a></span>
+        <span class="anrf-news-item"><a target="_blank" href="https://www.indiascienceandtechnology.gov.in/programme-schemes/research-and-development/anrf-prime-minister-professorship-program">ANRF- Prime Minister Professorship Program</a></span>
+        
       </div>
     </div>
   </div>
@@ -410,13 +617,5 @@
             vizObj.switchDashboardTabByIndex(tabName);
         }
 </script>
-
-
-
-
-
-
-
-
 </body>
 </html>
