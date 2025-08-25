@@ -544,17 +544,6 @@
                     <a rel="noopener" href="https://www.instagram.com/anrfindia/" target="blank" title="Follow on Instagram"><img src="images/instagram.png" alt="Instagram" /></a>
                     </div>
             </button>
-            <!-- <div class="tab-with-icons anrf-tab">
-                <div class="hover-wrap">
-                    
-                    <div class="social-icons">
-                    <a rel="noopener" href="https://www.facebook.com/anrfindia" target="blank" title="Follow on Facebook"><img src="images/facebook.png" alt="Facebook" /></a>
-                    <a rel="noopener" href="https://x.com/anrfindia" target="blank" title="Follow on Facebook"><img src="images/x.png" alt="X" /></a>
-                    <a rel="noopener" href="https://www.linkedin.com/in/anusandhan-national-research-foundation-anrf/" target="blank" title="Follow on linkedin"><img src="images/linkedin.png" alt="LinkedIn" /></a>
-                    <a rel="noopener" href="https://www.instagram.com/anrfindia/" target="blank" title="Follow on Instagram"><img src="images/instagram.png" alt="Instagram" /></a>
-                    </div>
-                </div>
-            </div> -->
 
 
           </div>
@@ -566,10 +555,10 @@
 
 <script>
     const reportDiv = document.getElementById("reportView");
-    const reportUrl = "https://analytics.zoho.com/open-view/1852205000002966103";
+    const reportUrl = "https://analytics.zoho.com/open-view/1852205000003848066";
     const reportOptions = {
         width: '100%',
-        height: 2700,
+        height: window.innerHeight - 130,
         defaultConfig: {
             hideDashboardTab: true
         }
@@ -580,9 +569,9 @@
 
         function onTabClick(tabId) {
             const tabIsVsNameMap = {
-                'tab1': "Sales Analysis Dashboard",
-                'tab2': "Cost Analysis Dashboard",
-                'tab3': "Profit Analysis Dashboard",
+                'tab1': "New Tab 1",
+                'tab2': "New Tab 2",
+                'tab3': "New Tab 3",
                 'tab4': "Cost, Profit VS Sales Dashboard"
             }
             const tabName = tabIsVsNameMap[tabId];
