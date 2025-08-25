@@ -519,7 +519,7 @@
     <div class="anrf-tab-holder">
       <div class="option tab-container" name='dashboardOptions' style="flex: 1;">
           <div class="anrf-tabs">
-            <button class="anrf-tab active" data-tab="tab1" onclick="onTabClick('tab1')">Innovation</button>
+            <button class="anrf-tab" data-tab="tab1" onclick="onTabClick('tab1')">Innovation</button>
             <button class="anrf-tab" data-tab="tab2" onclick="onTabClick('tab2')">Scholarship</button>
             <button class="anrf-tab" data-tab="tab3" onclick="onTabClick('tab3')">Funding</button>
             <button class="anrf-tab" data-tab="tab4" onclick="onTabClick('tab4')">S&T</button>
@@ -530,9 +530,9 @@
       </div>
       <div class="option tab-container" name='dashboardOptionsByIndex' style="flex: 1;">
           <div class="anrf-tabs">
-            <button class="anrf-tab" data-tab-index="IdxTab1" onclick="onTabClickByIndex('IdxTab1')">Programs & Schemes</button>
-            <button class="anrf-tab" data-tab-index="IdxTab2" onclick="onTabClickByIndex('IdxTab2')">ISTI</button>
-            <button class="anrf-tab" data-tab-index="IdxTab3" onclick="onTabClickByIndex('IdxTab2')">IRINS</button>
+            <button class="anrf-tab" data-tab="tab5" onclick="onTabClick('tab5')">Programs & Schemes</button>
+            <button class="anrf-tab" data-tab="tab6" onclick="onTabClick('tab6')">ISTI</button>
+            <button class="anrf-tab" data-tab="tab7" onclick="onTabClick('tab7')">IRINS</button>
 
             <button class="anrf-tab anrf-tab-newsFeed" data-tab-index="IdxTab4" onclick="onTabClickByIndex('IdxTab3')">
                 <span class="anrf-button-label">News feed</span>
@@ -569,17 +569,17 @@
 
         function onTabClick(tabId) {
             const tabIsVsNameMap = {
-                'tab1': "New Tab 1",
-                'tab2': "New Tab 2",
-                'tab3': "New Tab 3",
-                'tab4': "Cost, Profit VS Sales Dashboard"
+                'tab1': "Innovation",
+                'tab2': "Scholarship",
+                'tab3': "Funding",
+                'tab5': "Programs & Schemes"
             }
             const tabName = tabIsVsNameMap[tabId];
             if(!tabName) {
                 return;
             }
             // Remove active class from all tabs
-            const tabs = document.querySelectorAll('.tab[data-tab]');
+            const tabs = document.querySelectorAll('.anrf-tab[data-tab]');
             tabs.forEach(tab => tab.classList.remove('active'));
 
             // Add active class to the clicked tab
@@ -588,23 +588,20 @@
             vizObj.switchDashboardTabByName(tabName);
         }
 
-        function onTabClickByIndex(tabId) {
-            const tabIsVsNameMap = {
-                'IdxTab1': 0,
-                'IdxTab2': 1,
-                'IdxTab3': 2,
-                'IdxTab4': 3
-            }
-            const tabName = tabIsVsNameMap[tabId];
-            // Remove active class from all tabs
-            const tabs = document.querySelectorAll('.tab[data-tab-index]');
-            tabs.forEach(tab => tab.classList.remove('active'));
-
-            // Add active class to the clicked tab
-            const activeTab = document.querySelector(`.tab[data-tab-index="${tabId}"]`);
-            activeTab.classList.add('active');
-            vizObj.switchDashboardTabByIndex(tabName);
-        }
+        // function onTabClickByIndex(tabId) {
+        //     const tabIsVsNameMap = {
+        //         'IdxTab1': 0,
+        //         'IdxTab2': 1,
+        //         'IdxTab3': 2,
+        //         'IdxTab4': 3
+        //     }
+        //     const tabName = tabIsVsNameMap[tabId];
+        //     const tabs = document.querySelectorAll('.anrf-tab[data-tab-index]');
+        //     tabs.forEach(tab => tab.classList.remove('active'));
+        //     const activeTab = document.querySelector(`.anrf-tab[data-tab-index="${tabId}"]`);
+        //     activeTab.classList.add('active');
+        //     vizObj.switchDashboardTabByIndex(tabName);
+        // }
 </script>
 </body>
 </html>
