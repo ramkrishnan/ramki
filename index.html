@@ -1,136 +1,847 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ZAnalytics JS API</title>
-    <link rel="icon" type="image/x-icon" href="https://analytics.zoho.com/favicon.ico">
-    <script src="https://downloads.zohocdn.com/zanalyticslib/jsapi/v1/zanalytics.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://downloads.zohocdn.com/zanalyticslib/jsapi/v1.0.1/zanalytics.min.js"></script>
+    <title>ANRF</title>
+    <link rel="preload" href="https://static.zohocdn.com/zohofonts/zohopuvi/4.0/Zoho_Puvi_Regular.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="preload" href="https://fonts.zohostatic.com/zohopuvi/3.5/zoho_puvi_bold.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="preload" href="https://fonts.zohostatic.com/zohopuvi/3.5/zoho_puvi_extrabold.woff2" as="font" type="font/woff2" crossorigin="">
     <style>
+        @font-face {
+            font-family: 'Zoho_Puvi_Regular';
+            src: url('https://static.zohocdn.com/zohofonts/zohopuvi/4.0/Zoho_Puvi_Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Zoho_Puvi_Bold';
+            src: url('https://fonts.zohostatic.com/zohopuvi/3.5/zoho_puvi_bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Zoho_Puvi_ExtraBold';
+            src: url('https://fonts.zohostatic.com/zohopuvi/3.5/zoho_puvi_extrabold.woff2') format('woff2');
+            font-weight: 800;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Zoho_Puvi_Semibold';
+            src: url('https://static.zohocdn.com/zohofonts/zohopuvi/4.0/Zoho_Puvi_Semibold.woff2') format('woff2');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        }
         body {
             margin: 0;
         }
-        input, select, button {
-            background: #fff;
-            border-radius: 3px;
-            border: 1px solid #b8b8b8;
-            height: 30px;
-            margin: 5px;
-            padding-inline: 7px;
+        .anrf-banner {
+            background: linear-gradient(to right, #112854 44%, #1290FF 100%);
         }
-        input[type="date"], select {
-            width: 150px;
+        .anrf-banner__content {
+            padding: 40px 0 65px 40px;
         }
-        input[type="range"] {
-            width: 150px;
+        .anrf-logo-section {
+            margin: 0;
         }
-        button {
+        .anrf-logo-section img {
+            max-width: 300px;
+        }
+        .anrf-header__title {
+            color: #ffffff;
+            font-family: 'Zoho_Puvi_ExtraBold', sans-serif;
+            font-size: 33px;
+            font-weight: bold;
+            line-height: 40px;
+            margin: 0;
+            padding-top: 20px;
+            text-align: center;
+        }
+        .anrf-title__green {
+                color: #9FD681;
+        }
+        .anrf-title__yellow {
+                color: #FFC849;
+        }
+        .anrf-header__desc {
+            font-family: 'Zoho_Puvi_Bold', sans-serif;
+            font-size: 26px;
+            font-weight: bold;
+            font-style: italic;
+            margin: 0;
+            padding-top: 20px;
+            text-align: center;
+        }
+        .anrf-rt-section {
+            position: relative;
+            flex-grow: 1;
+            
+        }
+        .anrf-rt-section::before {
+            content: '';
+            position: absolute;
+            z-index: 3;
+            width: 100%;
+            height: 100%;
+            background: url('images/right-img.svg') right bottom no-repeat;
+        }
+        .anrf-banner__content {
+            display: flex;
+            flex-direction: column;
+            background-image: url('images/banner-center-img.png');
+            background-repeat: no-repeat;
+            background-size: auto 250px;
+            background-position: 45% 0%;
+        }
+        .anrf-banner__header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .anrf-wave-labels {
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+            align-items: self-end;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        .anrf-wave-labels li {
+            color: #ffffff;
+            font-family: 'Zoho_Puvi_Regular', sans-serif;
+            font-size: 12px;
+            text-align: center;
+            line-height: 1.3;
+            pointer-events: auto;
+        }
+        .anrf-wave-labels li::after {
+            content: "";
+            display: block;
+            width: 4px;
+            height: 60px;
+            margin: 8px auto 0;
+            background: linear-gradient(to bottom,
+                #DCCBCB 0%,
+                #FFC776 36%,
+                transparent 100%
+            );
+        }
+        .anrf-wave-labels li:hover::after {
+            content: "";
+            display: block;
+            width: 4px;
+            height: 60px;
+            margin: 8px auto 0;
+            background: linear-gradient(to bottom,
+                #DCCBCB 0%,
+                #9FD681 36%,
+                transparent 100%
+            );
+        }
+        .anrf-wave-labels li a {
+            color: #ffffff;
+            text-decoration: none;
             cursor: pointer;
+            position: relative;
+            z-index: 5;
+        }
+        .anrf-wave-labels li a:hover {
+            color: #FFC849;
         }
 
-        .zrop-userFilter {
-            display: flex;
-            gap: 25px;
-            padding: 5px 15px;
-            margin: 0;
-            background-color: #fffce7;
+
+
+
+
+        .anrf-font-gradient {
+            margin: 10px 20px;
         }
+        .anrf-news-wrapper {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            background: #e9e9ec;
+            font-family: 'Zoho_Puvi_Regular';
+            padding: 20px 0px 20px 20px;
+        }
+        .anrf-news-label {
+            font-family: 'Zoho_Puvi_ExtraBold', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            color: #78328B;
+            margin-right: 10px;
+            white-space: nowrap;
+        }
+        .anrf-news-container {
+            overflow: hidden;
+            flex: 1;
+            position: relative;
+        }
+        .anrf-news-track {
+            display: inline-block;
+            white-space: nowrap;
+        }
+        .anrf-news-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: scroll-left 25s linear infinite;
+            animation-play-state: running;
+        }
+        .anrf-news:hover .anrf-news-content,
+        .anrf-news-content:hover,
+        .anrf-news-content:focus-within {
+            animation-play-state: paused;
+        }
+        .anrf-news-item {
+            display: inline-block;
+            padding-right: 60px;
+        }
+        .anrf-news-item a {
+            font-family: 'Zoho_Puvi_Semibold';
+            color: #324775;
+            text-decoration: none;
+            position: relative;
+            white-space: nowrap;
+            padding-left: 15px;
+        }
+        .anrf-news-item a::before{
+            content:"";
+            position:absolute;
+            inset-block-start: 50%;
+            inset-inline-start: 0;
+            transform: translateY(-50%);
+            inline-size: 0;
+            block-size: 0;
+            border-block-start: 4px solid transparent;
+            border-block-end: 4px solid transparent;
+            border-inline-start: 6px solid #324775;
+            pointer-events:none;
+            transition: opacity .2s;
+        }
+
+        .anrf-news-item a:hover::before,
+        .anrf-news-item a:focus-visible::before{
+            opacity:.8;
+        }
+
+            /* RTL support */
+        [dir="rtl"] .anrf-news-item a::before{
+            border-inline-start: 0;
+            border-inline-end: 8px solid #324775;
+            inset-inline-start: auto;
+            inset-inline-end: 0;
+        }
+        
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .anrf-tab-wrapper {
+            background-color:#ffffff;
+            border:1px solid #d4d4d4;
+        }
+        .anrf-tab-holder {
+            display: flex;
+            gap: 20px;
+            padding: 0 30px;
+            height: auto;
+            align-items: flex-end;
+            justify-content: space-between;
+            overflow: visible;
+            border-bottom: 1px solid #dddddd;
+        }
+        .tab-container {
+            font-family: Arial, sans-serif;
+            width: 100%;
+            padding: 0;
+        }
+        .anrf-tabs {
+            display: flex;
+        }
+        .anrf-tab:not(img) {
+            flex: 1;
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+            background-color: #ffffff;
+            border: none;
+            outline: none;
+            height: 50px;
+            font-family: 'Zoho_Puvi_ExtraBold', sans-serif;
+            font-size: 14px;
+            color: #4c4c4c;
+            line-height: 1.5;
+            transition: background-color 0.3s;
+        }
+        .zrop-menu-item.zrop-has-submenu {
+            text-align: center;
+        }
+        .anrf-tab.anrf-tab-newsFeed {
+            cursor: default;
+        }
+        .anrf-tab:not(img):hover {
+            background-color: #e0e0e0;
+        }
+        .anrf-tab:not(img).active {
+            color: #0E65C3;
+            background-color: #fff;
+            border-bottom: 2px solid #007BFF;
+            font-weight: bold;
+        }
+        img.anrf-tab {
+            cursor: pointer;
+        }
+        .social-icons {
+            display: none;
+            padding: 10px;
+            justify-content: center;
+            border-radius: 4px;
+            gap: 12px;
+        }
+        .social-icons img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            cursor: pointer;
+        }
+        .anrf-tab-newsFeed:hover .social-icons img {
+            cursor: pointer;
+        }
+        .anrf-tab-newsFeed {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            transition: transform 0.3s ease;
+        }
+        .anrf-tab-newsFeed:hover .social-icons, .anrf-tab-newsFeed:hover .anrf-arrow-separator {
+            display: flex;
+        }
+        .anrf-arrow-separator {
+            display: none;
+            width: 6px;
+            height: 6px;
+            border-right: 2px solid #333;
+            border-top: 2px solid #333;
+            transform: rotate(45deg);
+            margin-inline-start: 10px;
+            transition: opacity 0.3s ease;
+        }
+        .anrf-button-label {
+            word-break: keep-all;
+            white-space: nowrap;
+        }
+        .anrf-tab-newsFeed:hover .anrf-button-label {
+            margin-inline-start: 10px;
+        }
+        
+
+
+
+
+
+
+
+
+
+
+        .anrf-wave-labels {
+            justify-content: flex-start;
+            gap: 40px;
+        }
+        .anrf-rt-section {
+            flex: 0 0 57%;
+            margin-left: -5%;
+        }
+        .anrf-wave-labels {
+            margin-inline: calc(6% + 70px) 50px;
+        }
+        .anrf-wave-labels li:nth-child(1) {
+            margin-block-end: 60px;
+        }
+        .anrf-wave-labels li:nth-child(2) {
+            margin-block-end: 125px;
+        }
+        .anrf-wave-labels li:nth-child(3) {
+            margin-block-end: 130px;
+        }
+        .anrf-wave-labels li:nth-child(4) {
+            margin-block-end: 145px;
+        }
+        .anrf-wave-labels li:nth-child(5) {
+            margin-block-end: 185px;
+        }
+
+        @media (max-width: 768px) {
+            .anrf-rt-section {
+             display: none;
+            }
+            .anrf-font-gradient {
+                display: none;
+            }
+            .anrf-lt-section {
+                padding: 20px 30px;
+            }
+            .anrf-news-wrapper {
+                padding: 20px 0px 20px 20px;
+            }
+            .anrf-tab-holder {
+                margin: 0 20px;
+            }
+            .anrf-header__title, .anrf-header__desc {
+                text-align: center;
+            }
+            .anrf-news-label {
+                margin-left: -15px;
+            }
+        }
+        @media (min-width: 769px) and (max-width: 1024px) {
+            /* .anrf-rt-section {
+             display: none;
+            } */
+            .anrf-lt-section {
+                padding: 40px 50px 0;
+            }
+            .anrf-news-wrapper {
+                padding: 20px 0px 20px 20px;
+            }
+            .anrf-tab-holder {
+                margin: 0 20px;
+            }
+            .anrf-banner__content {
+                flex-direction: column;
+            }
+            .anrf-wave-labels {
+                justify-content: space-evenly;
+                gap: 40px;
+            }
+            .anrf-wave-labels li:nth-child(1) {
+                margin-block-end: 50px;
+            }
+            .anrf-wave-labels li:nth-child(2) {
+                margin-block-end: 125px;
+            }
+            .anrf-wave-labels li:nth-child(3) {
+                margin-block-end: 130px;
+            }
+            .anrf-wave-labels li:nth-child(4) {
+                margin-block-end: 145px;
+            }
+            .anrf-wave-labels li:nth-child(5) {
+                margin-block-end: 185px;
+            }
+        }
+        @media (min-width: 1025px) and (max-width: 1440px) {
+            .anrf-rt-section {
+                flex: 0 0 60%;
+            }
+            .anrf-header__title {
+                font-size: 30px;
+            }
+            .anrf-wave-labels {
+                gap: 20px;
+            }
+            .anrf-wave-labels li:nth-child(1) {
+                margin-block-end: 60px;
+            }
+            .anrf-wave-labels li:nth-child(2) {
+                margin-block-end: 90px;
+            }
+            .anrf-wave-labels li:nth-child(3) {
+                margin-block-end: 95px;
+            }
+            .anrf-wave-labels li:nth-child(4) {
+                margin-block-end: 110px;
+            }
+            .anrf-wave-labels li:nth-child(5) {
+                margin-block-end: 150px;
+            }
+        }
+        @media (min-width: 1441px) and (max-width: 1710px) {
+            /* .anrf-rt-section {
+                flex: 0 0 47%;
+            } */
+        }
+
+
+
+
+
+
+        /* Base menu styling */
+.zrop-menu {
+  list-style: none;
+  display: flex;               /* Make horizontal */
+  justify-content: space-around;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  background: #fff;
+  font-family: 'Zoho_Puvi_ExtraBold', sans-serif;
+}
+
+/* Each menu item */
+.zrop-menu-item {
+  position: relative;
+}
+
+/* Top-level links */
+/* .zrop-menu-item > a {
+  padding: 12px 20px;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+} */
+.zrop-menu-item > a {
+    text-decoration: none;
+}
+
+/* Hover state for main items */
+.zrop-menu-item > a:hover {
+  color: #0078D7;
+  background-color: transparent;
+}
+
+/* Dropdown base (hidden by default) */
+.zrop-submenu {
+  position: absolute;
+  display: none;
+  top: 100%;
+  left: 0;
+  list-style: none;
+  background: #fff;
+  padding: 0;
+  margin: 0;
+  z-index: 999;
+  min-width: 100%;
+  max-height: 40vh;
+  overflow-y: auto;
+  border-radius: 5px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+.zrop-menu-item > .zrop-submenu.flip {
+    top: auto;
+    bottom: 100%;
+}
+
+/* Show dropdown on hover */
+.zrop-menu-item:hover > .zrop-submenu {
+  display: block;
+}
+
+/* Submenu links */
+.zrop-submenu li a, .zrop-submenu li button {
+  display: block;
+  padding: 15px;
+  font-size: 14px;
+  text-decoration: none;
+  color: #333;
+  white-space: nowrap;
+  font-weight: normal;
+}
+
+/* Submenu hover */
+.zrop-submenu li a:hover {
+  background-color: #f0f0f0;
+}
+
+/* ANRF logo center item */
+.anrf-logo {
+  font-size: 22px;
+  font-weight: 800;
+  pointer-events: none;
+}
+
+
+
+/* --- FOOTER STYLES --- */
+.anrf-footer {
+  background-color: #f8f9fa;
+  padding: 30px 20px;
+  border-top: 1px solid #e0e0e0;
+  margin-top: 20px;
+}
+
+.anrf-footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 60px;
+}
+
+.anrf-footer img {
+  height: 45px;
+  max-width: 180px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: all 0.3s ease-in-out;
+}
+
+.anrf-footer a:hover img {
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+
+
     </style>
 </head>
 <body>
-<div class="zrop-userFilter__holder">
-    <div class="zrop-userFilter">
-        <div class="zrop-userFilter__label">
-            <label>Date: </label><input type="date" id="dateFilter">
+    <header class="banner">
+        <div class="anrf-banner">
+            <div class="anrf-banner__bg">
+                <div class="anrf-banner__content">
+                    <div class="anrf-logo-section">
+                        <img src="images/logo.svg" />
+                    </div>
+                    <div class="anrf-banner__header">
+                        <h1 class="anrf-header__title">
+                            <span class="anrf-title__green">ANU</span>SANDHAN <span class="anrf-title__green">MA</span>STER <span class="anrf-title__green">P</span>LATFORM OF <span class="anrf-title__green">I</span>NDIAN <br><span class="anrf-title__yellow">RESEARCH AND INNOVATION</span>
+                        </h1>
+                        <h2 class="anrf-header__desc anrf-title__green">ANUMAPI</h2>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="zrop-userFilter__label">
-            <label>Region: </label>
-            <select id="regionFilter">
-                <option value='None'>Select</option>
-                <option value='Central'>Central</option>
-                <option value="East">East</option>
-                <option value="West">West</option>
-            </select>
-        </div>
-        <div class="zrop-userFilter__label">
-            <label>Product Category: </label>
-            <select id="productCategory">
-                <option value='None'>Select</option>
-                <option value='Furniture'>Furniture</option>
-                <option value="Grocery">Grocery</option>
-                <option value="Stationery">Stationary</option>
-            </select>
-        </div>
-        <div class="zrop-userFilter__label">
-            <label>Cost: </label><input type="range" id="costFilter" min="119000" max="300000" value="125000">
-        </div>
+    </header>
+
+    <div class="anrf-news-wrapper">
+  <span class="anrf-news-label">What’s new</span>
+  <div class="anrf-news-container">
+    <div class="anrf-news-track">
+      <div class="anrf-news-content">
+        <span class="anrf-news-item"><a target="_blank" href="https://www.indiascienceandtechnology.gov.in/programme-schemes/research-and-development/anrf-prime-minister-professorship-program">ANRF- Prime Minister Professorship Program (Last Date to Apply: 1 Sept. 2025)</a></span>
+        <span class="anrf-news-item"><a target="_blank" href="https://www.inspireawards-dst.gov.in/">INSPIRE-MANAK Call for Nominations for Students’ Technological Ideas/Innovations (Last date to Apply: 15th September 2025)</a></span>
+        <span class="anrf-news-item"><a target="_blank" href="https://psa.gov.in/CMS/web/sites/default/files/psa_custom_files/EOI%20for%20logo_27062025.pdf">Office of the PSA Invites for Logo Design Contest for S&T Clusters (Last Date to Apply: 15th July 2025)</a></span>
+        <span class="anrf-news-item"><a target="_blank" href="https://www.mygov.in/group-issue/public-consultation-help-shape-ai-impact-summit-2026/">IndiaAI Mission Seeks Suggestions for AI Impact Summit 2026 (Last Date is 30 June 2025)</a></span>
+        <span class="anrf-news-item"><a target="_blank" href="https://www.indiascienceandtechnology.gov.in/internships/nif-student-internship-programme-scouting-and-documentation-grassroots-innovations-gris">NIF-Student Internship Programme for Scouting and Documentation of Grassroots Innovations (GRIs)</a></span>
+        <span class="anrf-news-item"><a target="_blank" href="https://www.indiascienceandtechnology.gov.in/nurturing-minds/scholarships/iit-bombay-institute-post-doctoral-fellowship-ipdf">IIT Bombay- Institute Post- Doctoral Fellowship (IPDF)</a></span>
+        <span class="anrf-news-item"><a target="_blank" href="https://www.indiascienceandtechnology.gov.in/programme-schemes/human-resource-and-development/star-college-scheme">Star College Scheme</a></span>
+        <span class="anrf-news-item"><a target="_blank" href="https://www.indiascienceandtechnology.gov.in/programme-schemes/research-and-development/anrf-prime-minister-professorship-program">ANRF- Prime Minister Professorship Program</a></span>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="anrf-tab-wrapper">
+    <div class="anrf-tab-holder">
+      <div class="option tab-container" name='dashboardOptions' style="flex: 1;">
+          <nav class="zrop-nav" role="navigation" aria-label="Main Navigation">
+            <ul class="zrop-menu">
+                <li class="zrop-menu-item zrop-has-submenu">
+                    <button class="anrf-tab">Innovations - Ministries & Departments</button>
+                    <ul class="zrop-submenu" >
+                    <li><a href="https://drdo.res.in/drdo/" target="_blank">Defence Research and Development Organisation (DRDO)</a></li>
+                    <li><a href="https://dae.gov.in/" target="_blank">Department of Atomic Energy (DAE)</a></li>
+                    <li><a href="https://www.dsir.gov.in/" target="_blank">Department of Scientific & Industrial Research (DSIR)</a></li>
+                    <li><a href="https://dbtindia.gov.in/" target="_blank">Department of Biotechnology (DBT)</a></li>
+                    <li><a href="https://dst.gov.in/" target="_blank">Department of Science and Technology (DST)</a></li>
+                    <li><a href="https://dbtyas-sports.gov.in/" target="_blank">Department of Space (DoS)</a></li>
+                    <li><a href="https://www.icar.org.in/" target="_blank">Indian Council of Agricultural Research (ICAR)</a></li>
+                    <li><a href="https://www.icmr.gov.in/" target="_blank">Indian Council of Medical Research (ICMR)</a></li>
+                    <li><a href="https://moes.gov.in/" target="_blank">Ministry of Earth Sciences (MoES)</a></li>
+                    <li><a href="https://www.education.gov.in/" target="_blank">Ministry of Education (MoE)</a></li>
+                    <li><a href="https://www.meity.gov.in/" target="_blank">Ministry of Electronics and Information Technology (MeitY)</a></li>
+                    <li><a href="https://moef.gov.in/" target="_blank">Ministry of Environment, Forest and Climate Change (MoEF & CC)</a></li>
+                    <li><a href="https://mnre.gov.in/" target="_blank">Ministry of New and Renewable Energy (MNRE)</a></li>
+                    </ul>
+                </li>
+                <li class="zrop-menu-item zrop-has-submenu">
+                    <button class="anrf-tab">Scholarship - Institutions of Higher Learning</button>
+                    <ul class="zrop-submenu">
+                    <li>
+                        <button class="anrf-tab" data-tab-index="IdxTab1" onclick="onTabClickByIndex('IdxTab1')">Central University</button>
+                        <!-- <a href="#" class="ramki"></a> -->
+                    </li>
+                    <li>
+                        <button class="anrf-tab" data-tab-index="IdxTab2" onclick="onTabClickByIndex('IdxTab2')">Institute of National Importance</button>
+                        <!-- <a href="#" class="ramki"></a> -->
+                    </li>
+                    </ul>
+                </li>
+                <li class="zrop-menu-item zrop-has-submenu">
+                    <button aria-haspopup="true" aria-expanded="false" class="anrf-tab">Funding with Innovation</button>
+                    <ul class="zrop-submenu">
+                        
+                    <li>
+                        <button class="anrf-tab" data-tab-index="IdxTab3" onclick="onTabClickByIndex('IdxTab3')">Weekly Patent Application Granted</button>
+                        <!-- <a href="#" class="ramki"></a></li> -->
+                    <li>
+                        <button class="anrf-tab" data-tab-index="IdxTab4" onclick="onTabClickByIndex('IdxTab4')">Weekly Patent Application Published</button>
+                        <!-- <a href="#" class="ramki"></a> -->
+                    </li>
+                    </ul>
+                </li>
+                <li class="zrop-menu-item anrf-logo">
+                    <a data-tab-index="IdxTab" onclick="onTabClickByIndex('IdxTab')">
+                        <span>AN<span style="color:#476EAD;">R</span><span style="color:#F5B131;">F</span></span>
+                    </a>
+                    
+                </li>
+                <li class="zrop-menu-item zrop-has-submenu">
+                    <a href="https://www.istem.gov.in/" target="_blank" class="anrf-tab">Programs and Schemes with Scientific Infrastructure</a>
+                </li>
+                <li class="zrop-menu-item zrop-has-submenu">
+                    <a href=" https://analytics.zoho.in/open-view/465348000000008392" target="_blank" class="anrf-tab">Find Expert</a>
+                </li>
+                <li class="zrop-menu-item zrop-has-submenu">
+                    <button class="anrf-tab anrf-tab-newsFeed">
+                <span class="anrf-button-label">News feed</span>
+                 <span class="anrf-arrow-separator"></span>
+                <div class="social-icons">
+                    <a rel="noopener" href="https://www.facebook.com/anrfindia" target="blank" title="Follow on Facebook"><img src="images/facebook.png" alt="Facebook" /></a>
+                    <a rel="noopener" href="https://x.com/anrfindia" target="blank" title="Follow on Facebook"><img src="images/x.png" alt="X" /></a>
+                    <a rel="noopener" href="https://www.linkedin.com/in/anusandhan-national-research-foundation-anrf/" target="blank" title="Follow on linkedin"><img src="images/linkedin.png" alt="LinkedIn" /></a>
+                    <a rel="noopener" href="https://www.instagram.com/anrfindia/" target="blank" title="Follow on Instagram"><img src="images/instagram.png" alt="Instagram" /></a>
+                    </div>
+            </button>
+                </li>
+                <!-- <li class="zrop-menu-item zrop-has-submenu">
+                    <button aria-haspopup="true" aria-expanded="false" class="anrf-tab">News feed</button>
+                    <ul class="zrop-submenu">
+                    <li>
+                        <a rel="noopener" href="https://www.facebook.com/anrfindia" target="blank" title="Follow on Facebook"><img src="images/facebook.png" alt="Facebook" /></a>
+                    </li>
+                    <li>
+                        <a rel="noopener" href="https://x.com/anrfindia" target="blank" title="Follow on Facebook"><img src="images/x.png" alt="X" /></a>
+                    </li>
+                    <li>
+                        <a rel="noopener" href="https://www.linkedin.com/in/anusandhan-national-research-foundation-anrf/" target="blank" title="Follow on linkedin"><img src="images/linkedin.png" alt="LinkedIn" /></a>
+                    </li>
+                    <li>
+                    <a rel="noopener" href="https://www.instagram.com/anrfindia/" target="blank" title="Follow on Instagram"><img src="images/instagram.png" alt="Instagram" /></a></li>
+                    </ul>
+                </li> -->
+            </ul>
+            </nav>
+      </div>
     </div>
     <div id="reportView"></div>
 </div>
-
-<div class="zrop-userFilter__holder">
-    <div class="zrop-userFilter">
-        <div class="zrop-userFilter__label">
-            <label>Region: </label>
-            <select id="regionFilter2">
-                <option value='None'>Select</option>
-                <option value='Central'>Central</option>
-                <option value="East">East</option>
-                <option value="West">West</option>
-            </select>
-        </div>
-    </div>
-    <div id="reportView2"></div>
+<div class="anrf-footer">
+    <ul>
+        <li>
+            <a href="https://shodhganga.inflibnet.ac.in" target="_blank"><img src="images/footer_logo/shodhganga.gif" /></a>
+        </li>
+        <li>
+            <a href="DATA.GOV.IN" target="_blank"><img src="images/footer_logo/data.gov.svg" /></a>
+        </li>
+        <li>
+            <a href="https://irins.org/" target="_blank"><img src="images/footer_logo/irins.png" /></a>
+        </li>
+        <li>
+            <a href="https://aishe.gov.in/" target="_blank"><img src="images/footer_logo/aishe.png" /></a>
+        </li>
+    </ul>
 </div>
+
 
 <script>
     const reportDiv = document.getElementById("reportView");
-    const reportUrl = "https://analytics.zoho.com/open-view/789037000001911505";
+    const reportUrl = "https://analytics.zoho.in/open-view/465348000000018006";
     const reportOptions = {
         width: '100%',
-        height: 400
+        height: window.innerHeight - 30,
+        defaultConfig: {
+            hideDashboardTab: true
+        }
     };
     const vizObj = new ZAnalyticsLib(reportDiv, reportUrl, reportOptions);
     vizObj.createViz();
 
 
-    const reportDiv2 = document.getElementById("reportView2");
-    const reportUrl2 = "https://analytics.zoho.com/open-view/2588560000000102021/a492ca0193d7b3962f31d3326069d91a";
-    const reportOptions2 = {
-        width: '100%',
-        height: 400
-    };
-    const vizObj2 = new ZAnalyticsLib(reportDiv2, reportUrl2, reportOptions2);
-    vizObj2.createViz();
+        function setActiveTab(clickedTab) {
+    // 1. Remove 'active' class from ALL tab buttons/links
+    const allTabs = document.querySelectorAll('.anrf-tab');
+    allTabs.forEach(tab => {
+        tab.classList.remove('active');
+    });
 
-    document.getElementById("dateFilter").onchange = function() {
-        if (!this.value) {
-            vizObj.applyUserFilter('Date', 'RESET');
-        } else {
-            const date = new Date(this.value);
-            const day = String(date.getDate()).padStart(2, '0');
-            const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-            const formattedDate = `${day} ${monthNames[date.getMonth()]} ${date.getFullYear()} 00:00:00`;
-            vizObj.applyUserFilter('Date', { to: formattedDate });
-        }
-    };
+    // 2. Add 'active' class to the specific tab that was clicked
+    if (clickedTab) {
+        clickedTab.classList.add('active');
+    }
+}
 
-    document.getElementById("regionFilter").onchange = function() {
-        vizObj.applyUserFilter('Region', this.value === 'None' ? 'RESET' : this.value);
-        vizObj2.applyUserFilter('Region', this.value === 'None' ? 'RESET' : this.value);
-    };
+// This function is not used by your current HTML, but is here for future use
+function onTabClick(tabId) {
+    const tabIsVsNameMap = {
+        'tab': "ANRF",
+        'tab1': "Central University",
+        'tab2': "Institute of National Importance",
+        'tab3': "Weekly Patent Application Published",
+        'tab5': "Weekly Patent Application Granted"
+    }
+    const tabName = tabIsVsNameMap[tabId];
+    if(!tabName) {
+        return;
+    }
+    // Find the clicked element and set it as active
+    const clickedElement = document.querySelector(`.anrf-tab[data-tab="${tabId}"]`);
+    setActiveTab(clickedElement);
 
-    document.getElementById("regionFilter2").onchange = function() {
-        vizObj.applyUserFilter('Region', this.value === 'None' ? 'RESET' : this.value);
-        vizObj2.applyUserFilter('Region', this.value === 'None' ? 'RESET' : this.value);
-    };
+    vizObj.switchDashboardTabByName(tabName);
+}
 
-    document.getElementById("productCategory").onchange = function() {
-        vizObj.applyUserFilter('Product Category', this.value === 'None' ? 'RESET' : this.value);
+function onTabClickByIndex(tabId) {
+    const tabIdVsIndexMap = { // Renamed for clarity
+        'IdxTab': 0,
+        'IdxTab1': 1,
+        'IdxTab2': 2,
+        'IdxTab3': 3,
+        'IdxTab4': 4
     };
+    const tabIndex = tabIdVsIndexMap[tabId];
 
-    document.getElementById("costFilter").onchange = function() {
-        vizObj.applyUserFilter('Cost', { from: this.min, to: this.value });
-    };
+    if (tabIndex === undefined) {
+        return; // Exit if the tabId is not found
+    }
+
+    // Find the clicked element and set it as active
+    const clickedElement = document.querySelector(`.anrf-tab[data-tab-index="${tabId}"]`);
+    setActiveTab(clickedElement);
+
+    // Switch the dashboard tab
+    vizObj.switchDashboardTabByIndex(tabIndex);
+}
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuItems = document.querySelectorAll('.zrop-menu-item.zrop-has-submenu');
+
+        menuItems.forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                const submenu = this.querySelector('.zrop-submenu');
+                if (submenu) {
+                    const rect = submenu.getBoundingClientRect();
+                    const viewportHeight = window.innerHeight;
+                    const potentialBottom = item.getBoundingClientRect().bottom + submenu.offsetHeight;
+                    
+                    if (potentialBottom > viewportHeight) {
+                        submenu.classList.add('flip');
+                    } else {
+                        submenu.classList.remove('flip');
+                    }
+                }
+            });
+        });
+    });
 </script>
 </body>
 </html>
