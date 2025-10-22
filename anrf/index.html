@@ -47,10 +47,11 @@
             background: linear-gradient(to right, #112854 44%, #1290FF 100%);
         }
         .anrf-banner__content {
-            padding: 40px 0 65px 40px;
+            padding: 40px 0 65px;
         }
         .anrf-logo-section {
             margin: 0;
+            padding-left: 40px;
         }
         .anrf-logo-section img {
             max-width: 300px;
@@ -275,7 +276,6 @@
             background-color: #ffffff;
             border: none;
             outline: none;
-            height: 50px;
             font-family: 'Zoho_Puvi_ExtraBold', sans-serif;
             font-size: 14px;
             color: #4c4c4c;
@@ -342,17 +342,6 @@
         .anrf-tab-newsFeed:hover .anrf-button-label {
             margin-inline-start: 10px;
         }
-        
-
-
-
-
-
-
-
-
-
-
         .anrf-wave-labels {
             justify-content: flex-start;
             gap: 40px;
@@ -404,9 +393,6 @@
             }
         }
         @media (min-width: 769px) and (max-width: 1024px) {
-            /* .anrf-rt-section {
-             display: none;
-            } */
             .anrf-lt-section {
                 padding: 40px 50px 0;
             }
@@ -465,54 +451,36 @@
                 margin-block-end: 150px;
             }
         }
-        @media (min-width: 1441px) and (max-width: 1710px) {
-            /* .anrf-rt-section {
-                flex: 0 0 47%;
-            } */
-        }
 
-
-
-
-
-
-        /* Base menu styling */
 .zrop-menu {
   list-style: none;
-  display: flex;               /* Make horizontal */
+  display: flex;
   justify-content: space-around;
   align-items: center;
+  width: 100%;
   padding: 0;
   margin: 0;
   background: #fff;
   font-family: 'Zoho_Puvi_ExtraBold', sans-serif;
 }
 
-/* Each menu item */
 .zrop-menu-item {
   position: relative;
 }
-
-/* Top-level links */
-/* .zrop-menu-item > a {
-  padding: 12px 20px;
-  text-decoration: none;
-  color: #333;
-  font-size: 14px;
-  font-weight: 700;
-  white-space: nowrap;
-} */
 .zrop-menu-item > a {
     text-decoration: none;
 }
-
-/* Hover state for main items */
+.zrop-menu-item a.anrf-tab, .zrop-menu-item button.anrf-tab {
+    padding: 15px;
+    display: flex;
+}
+.zrop-menu-item button.anrf-tab.anrf-tab-newsFeed:hover {
+    padding: 3px;
+}
 .zrop-menu-item > a:hover {
   color: #0078D7;
   background-color: transparent;
 }
-
-/* Dropdown base (hidden by default) */
 .zrop-submenu {
   position: absolute;
   display: none;
@@ -533,13 +501,9 @@
     top: auto;
     bottom: 100%;
 }
-
-/* Show dropdown on hover */
 .zrop-menu-item:hover > .zrop-submenu {
   display: block;
 }
-
-/* Submenu links */
 .zrop-submenu li a, .zrop-submenu li button {
   display: block;
   padding: 15px;
@@ -549,22 +513,14 @@
   white-space: nowrap;
   font-weight: normal;
 }
-
-/* Submenu hover */
 .zrop-submenu li a:hover {
   background-color: #f0f0f0;
 }
-
-/* ANRF logo center item */
 .anrf-logo {
   font-size: 22px;
   font-weight: 800;
   pointer-events: none;
 }
-
-
-
-/* --- FOOTER STYLES --- */
 .anrf-footer {
   background-color: #f8f9fa;
   padding: 30px 20px;
@@ -580,7 +536,7 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 60px;
+  gap: 100px;
 }
 
 .anrf-footer img {
@@ -591,6 +547,9 @@
   opacity: 0.7;
   transition: all 0.3s ease-in-out;
 }
+.anrf-footer .anrf-footer-logo img {
+    max-width: 250px;
+}
 
 .anrf-footer a:hover img {
   filter: grayscale(0%);
@@ -599,6 +558,43 @@
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+.zrop-menu-group {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+ul.zrop-menu-subgroup {
+    list-style-type: none;
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.zrop-menu-left {
+  justify-content: flex-start; 
+}
+
+.zrop-menu-right {
+  justify-content: flex-end; 
+}
+
+.anrf-logo {
+  flex: 0 0 auto; 
+  padding: 0 50px;
+}
 
     </style>
 </head>
@@ -645,90 +641,86 @@
       <div class="option tab-container" name='dashboardOptions' style="flex: 1;">
           <nav class="zrop-nav" role="navigation" aria-label="Main Navigation">
             <ul class="zrop-menu">
-                <li class="zrop-menu-item zrop-has-submenu">
-                    <button class="anrf-tab">Innovations - Ministries & Departments</button>
-                    <ul class="zrop-submenu" >
-                    <li><a href="https://drdo.res.in/drdo/" target="_blank">Defence Research and Development Organisation (DRDO)</a></li>
-                    <li><a href="https://dae.gov.in/" target="_blank">Department of Atomic Energy (DAE)</a></li>
-                    <li><a href="https://www.dsir.gov.in/" target="_blank">Department of Scientific & Industrial Research (DSIR)</a></li>
-                    <li><a href="https://dbtindia.gov.in/" target="_blank">Department of Biotechnology (DBT)</a></li>
-                    <li><a href="https://dst.gov.in/" target="_blank">Department of Science and Technology (DST)</a></li>
-                    <li><a href="https://dbtyas-sports.gov.in/" target="_blank">Department of Space (DoS)</a></li>
-                    <li><a href="https://www.icar.org.in/" target="_blank">Indian Council of Agricultural Research (ICAR)</a></li>
-                    <li><a href="https://www.icmr.gov.in/" target="_blank">Indian Council of Medical Research (ICMR)</a></li>
-                    <li><a href="https://moes.gov.in/" target="_blank">Ministry of Earth Sciences (MoES)</a></li>
-                    <li><a href="https://www.education.gov.in/" target="_blank">Ministry of Education (MoE)</a></li>
-                    <li><a href="https://www.meity.gov.in/" target="_blank">Ministry of Electronics and Information Technology (MeitY)</a></li>
-                    <li><a href="https://moef.gov.in/" target="_blank">Ministry of Environment, Forest and Climate Change (MoEF & CC)</a></li>
-                    <li><a href="https://mnre.gov.in/" target="_blank">Ministry of New and Renewable Energy (MNRE)</a></li>
-                    </ul>
-                </li>
-                <li class="zrop-menu-item zrop-has-submenu">
-                    <button class="anrf-tab">Scholarship - Institutions of Higher Learning</button>
-                    <ul class="zrop-submenu">
-                    <li>
-                        <button class="anrf-tab" data-tab-index="IdxTab1" onclick="onTabClickByIndex('IdxTab1')">Central University</button>
-                        <!-- <a href="#" class="ramki"></a> -->
-                    </li>
-                    <li>
-                        <button class="anrf-tab" data-tab-index="IdxTab2" onclick="onTabClickByIndex('IdxTab2')">Institute of National Importance</button>
-                        <!-- <a href="#" class="ramki"></a> -->
-                    </li>
-                    </ul>
-                </li>
-                <li class="zrop-menu-item zrop-has-submenu">
-                    <button aria-haspopup="true" aria-expanded="false" class="anrf-tab">Funding with Innovation</button>
-                    <ul class="zrop-submenu">
-                        
-                    <li>
-                        <button class="anrf-tab" data-tab-index="IdxTab3" onclick="onTabClickByIndex('IdxTab3')">Weekly Patent Application Granted</button>
-                        <!-- <a href="#" class="ramki"></a></li> -->
-                    <li>
-                        <button class="anrf-tab" data-tab-index="IdxTab4" onclick="onTabClickByIndex('IdxTab4')">Weekly Patent Application Published</button>
-                        <!-- <a href="#" class="ramki"></a> -->
-                    </li>
+                <li class="zrop-menu-group zrop-menu-left">
+                    <ul class="zrop-menu-subgroup">
+
+                        <li class="zrop-menu-item zrop-has-submenu">
+                            <button class="anrf-tab">Ministries & Departments</button>
+                            <ul class="zrop-submenu" >
+                            <li><a href="https://drdo.res.in/drdo/" target="_blank">Defence Research and Development Organisation (DRDO)</a></li>
+                            <li><a href="https://dae.gov.in/" target="_blank">Department of Atomic Energy (DAE)</a></li>
+                            <li><a href="https://www.dsir.gov.in/" target="_blank">Department of Scientific & Industrial Research (DSIR)</a></li>
+                            <li><a href="https://dbtindia.gov.in/" target="_blank">Department of Biotechnology (DBT)</a></li>
+                            <li><a href="https://dst.gov.in/" target="_blank">Department of Science and Technology (DST)</a></li>
+                            <li><a href="https://dbtyas-sports.gov.in/" target="_blank">Department of Space (DoS)</a></li>
+                            <li><a href="https://www.icar.org.in/" target="_blank">Indian Council of Agricultural Research (ICAR)</a></li>
+                            <li><a href="https://www.icmr.gov.in/" target="_blank">Indian Council of Medical Research (ICMR)</a></li>
+                            <li><a href="https://moes.gov.in/" target="_blank">Ministry of Earth Sciences (MoES)</a></li>
+                            <li><a href="https://www.education.gov.in/" target="_blank">Ministry of Education (MoE)</a></li>
+                            <li><a href="https://www.meity.gov.in/" target="_blank">Ministry of Electronics and Information Technology (MeitY)</a></li>
+                            <li><a href="https://moef.gov.in/" target="_blank">Ministry of Environment, Forest and Climate Change (MoEF & CC)</a></li>
+                            <li><a href="https://mnre.gov.in/" target="_blank">Ministry of New and Renewable Energy (MNRE)</a></li>
+                            </ul>
+                        </li>
+                        <li class="zrop-menu-item zrop-has-submenu">
+                            <button class="anrf-tab">Institutions of Higher Learning</button>
+                            <ul class="zrop-submenu">
+                            <li>
+                                <button class="anrf-tab" data-tab-index="IdxTab1" onclick="onTabClickByIndex('IdxTab1')">Central University</button>
+                                <!-- <a href="#" class="ramki"></a> -->
+                            </li>
+                            <li>
+                                <button class="anrf-tab" data-tab-index="IdxTab2" onclick="onTabClickByIndex('IdxTab2')">Institute of National Importance</button>
+                                <!-- <a href="#" class="ramki"></a> -->
+                            </li>
+                            </ul>
+                        </li>
+                        <li class="zrop-menu-item zrop-has-submenu">
+                            <button aria-haspopup="true" aria-expanded="false" class="anrf-tab">Innovation</button>
+                            <ul class="zrop-submenu">
+                                
+                            <li>
+                                <button class="anrf-tab" data-tab-index="IdxTab3" onclick="onTabClickByIndex('IdxTab3')">Weekly Patent Application Granted</button>
+                                <!-- <a href="#" class="ramki"></a></li> -->
+                            <li>
+                                <button class="anrf-tab" data-tab-index="IdxTab4" onclick="onTabClickByIndex('IdxTab4')">Weekly Patent Application Published</button>
+                                <!-- <a href="#" class="ramki"></a> -->
+                            </li>
+                            </ul>
+                        </li>
+
                     </ul>
                 </li>
                 <li class="zrop-menu-item anrf-logo">
                     <a data-tab-index="IdxTab" onclick="onTabClickByIndex('IdxTab')">
                         <span>AN<span style="color:#476EAD;">R</span><span style="color:#F5B131;">F</span></span>
                     </a>
-                    
                 </li>
-                <li class="zrop-menu-item zrop-has-submenu">
-                    <a href="https://www.istem.gov.in/" target="_blank" class="anrf-tab">Programs and Schemes with Scientific Infrastructure</a>
-                </li>
-                <li class="zrop-menu-item zrop-has-submenu">
-                    <a href=" https://analytics.zoho.in/open-view/465348000000008392" target="_blank" class="anrf-tab">Find Expert</a>
-                </li>
-                <li class="zrop-menu-item zrop-has-submenu">
-                    <button class="anrf-tab anrf-tab-newsFeed">
-                <span class="anrf-button-label">News feed</span>
-                 <span class="anrf-arrow-separator"></span>
-                <div class="social-icons">
-                    <a rel="noopener" href="https://www.facebook.com/anrfindia" target="blank" title="Follow on Facebook"><img src="images/facebook.png" alt="Facebook" /></a>
-                    <a rel="noopener" href="https://x.com/anrfindia" target="blank" title="Follow on Facebook"><img src="images/x.png" alt="X" /></a>
-                    <a rel="noopener" href="https://www.linkedin.com/in/anusandhan-national-research-foundation-anrf/" target="blank" title="Follow on linkedin"><img src="images/linkedin.png" alt="LinkedIn" /></a>
-                    <a rel="noopener" href="https://www.instagram.com/anrfindia/" target="blank" title="Follow on Instagram"><img src="images/instagram.png" alt="Instagram" /></a>
-                    </div>
-            </button>
-                </li>
-                <!-- <li class="zrop-menu-item zrop-has-submenu">
-                    <button aria-haspopup="true" aria-expanded="false" class="anrf-tab">News feed</button>
-                    <ul class="zrop-submenu">
-                    <li>
-                        <a rel="noopener" href="https://www.facebook.com/anrfindia" target="blank" title="Follow on Facebook"><img src="images/facebook.png" alt="Facebook" /></a>
-                    </li>
-                    <li>
-                        <a rel="noopener" href="https://x.com/anrfindia" target="blank" title="Follow on Facebook"><img src="images/x.png" alt="X" /></a>
-                    </li>
-                    <li>
-                        <a rel="noopener" href="https://www.linkedin.com/in/anusandhan-national-research-foundation-anrf/" target="blank" title="Follow on linkedin"><img src="images/linkedin.png" alt="LinkedIn" /></a>
-                    </li>
-                    <li>
-                    <a rel="noopener" href="https://www.instagram.com/anrfindia/" target="blank" title="Follow on Instagram"><img src="images/instagram.png" alt="Instagram" /></a></li>
+
+                <li class="zrop-menu-group zrop-menu-right">
+                    <ul class="zrop-menu-subgroup">
+
+
+                        <li class="zrop-menu-item zrop-has-submenu">
+                            <a href="https://www.istem.gov.in/" target="_blank" class="anrf-tab">Scientific Infrastructure</a>
+                        </li>
+                        <li class="zrop-menu-item zrop-has-submenu">
+                            <a href=" https://analytics.zoho.in/open-view/465348000000008392" target="_blank" class="anrf-tab">Find Expert</a>
+                        </li>
+                        <li class="zrop-menu-item zrop-has-submenu">
+                            <button class="anrf-tab anrf-tab-newsFeed">
+                        <span class="anrf-button-label">News feed</span>
+                        <span class="anrf-arrow-separator"></span>
+                        <div class="social-icons">
+                            <a rel="noopener" href="https://www.facebook.com/anrfindia" target="blank" title="Follow on Facebook"><img src="images/facebook.png" alt="Facebook" /></a>
+                            <a rel="noopener" href="https://x.com/anrfindia" target="blank" title="Follow on Facebook"><img src="images/x.png" alt="X" /></a>
+                            <a rel="noopener" href="https://www.linkedin.com/in/anusandhan-national-research-foundation-anrf/" target="blank" title="Follow on linkedin"><img src="images/linkedin.png" alt="LinkedIn" /></a>
+                            <a rel="noopener" href="https://www.instagram.com/anrfindia/" target="blank" title="Follow on Instagram"><img src="images/instagram.png" alt="Instagram" /></a>
+                            </div>
+                        </button>
+                        </li>
                     </ul>
-                </li> -->
+                </li>
             </ul>
             </nav>
       </div>
@@ -741,7 +733,10 @@
             <a href="https://shodhganga.inflibnet.ac.in" target="_blank"><img src="images/footer_logo/shodhganga.gif" /></a>
         </li>
         <li>
-            <a href="DATA.GOV.IN" target="_blank"><img src="images/footer_logo/data.gov.svg" /></a>
+            <a href="https://www.data.gov.in/" target="_blank"><img src="images/footer_logo/data.gov.svg" /></a>
+        </li>
+        <li class="anrf-footer-logo">
+            <a href="https://www.anrfonline.in/ANRF/HomePage" target="_blank"><img src="images/footer_logo/anrf.png" /></a>
         </li>
         <li>
             <a href="https://irins.org/" target="_blank"><img src="images/footer_logo/irins.png" /></a>
@@ -755,7 +750,7 @@
 
 <script>
     const reportDiv = document.getElementById("reportView");
-    const reportUrl = "https://analytics.zoho.in/open-view/465348000000018006";
+    const reportUrl = "https://reports.zoho.in/open-view/465348000000018006/63596d92351fee2e85d77d6e2b00b120";
     const reportOptions = {
         width: '100%',
         height: window.innerHeight - 30,
