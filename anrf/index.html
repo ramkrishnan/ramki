@@ -763,9 +763,13 @@ ul.zrop-menu-subgroup {
 <script>
     const reportDiv = document.getElementById("reportView");
     const reportUrl = "https://reports.zoho.in/open-view/465348000000018006/63596d92351fee2e85d77d6e2b00b120";
+
+    let currentActiveTabId = 'IdxTab0';
+    const fixedHeight = '2650px';
+
     const reportOptions = {
         width: '100%',
-        height: window.innerHeight - 130,
+        height: fixedHeight,
         defaultConfig: {
             hideDashboardTab: true
         }
@@ -774,59 +778,94 @@ ul.zrop-menu-subgroup {
     vizObj.createViz();
 
 
-        function setActiveTab(clickedTab) {
-    const allTabs = document.querySelectorAll('.anrf-tab');
-    allTabs.forEach(tab => {
-        tab.classList.remove('active');
-    });
+    function setActiveTab(clickedTab) {
+        const allTabs = document.querySelectorAll('.anrf-tab');
+        allTabs.forEach(tab => {
+            tab.classList.remove('active');
+        });
 
-    if (clickedTab) {
-        clickedTab.classList.add('active');
-    }
-}
-
-function onTabClick(tabId) {
-    const tabIsVsNameMap = {
-        'tab0': "ANRF",
-        'tab1': "Central University",
-        'tab2': "Institute of National Importance",
-        'tab3': "Weekly Patent Application Granted",
-        'tab4': "Weekly Patent Application Published",
-        'tab5': "ANRF MAIN"
-    }
-    const tabName = tabIsVsNameMap[tabId];
-    if(!tabName) {
-        return;
-    }
-    // Find the clicked element and set it as active
-    const clickedElement = document.querySelector(`.anrf-tab[data-tab="${tabId}"]`);
-    setActiveTab(clickedElement);
-
-    vizObj.switchDashboardTabByName(tabName);
-}
-
-function onTabClickByIndex(tabId) {
-    const tabIdVsIndexMap = { // Renamed for clarity
-        'IdxTab0': 0,
-        'IdxTab1': 1,
-        'IdxTab2': 2,
-        'IdxTab3': 3,
-        'IdxTab4': 4,
-        'IdxTab5': 5
-    };
-    const tabIndex = tabIdVsIndexMap[tabId];
-
-    if (tabIndex === undefined) {
-        return; // Exit if the tabId is not found
+        if (clickedTab) {
+            clickedTab.classList.add('active');
+        }
     }
 
-    // Find the clicked element and set it as active
-    const clickedElement = document.querySelector(`.anrf-tab[data-tab-index="${tabId}"]`);
-    setActiveTab(clickedElement);
+    // --- NEW FUNCTION ---
+    // This function finds the iframe and sets its height based on the active tab
+    function setReportHeight() {
+        // The Zoho lib creates an iframe inside your 'reportView' div
+        const reportIframe = document.querySelector("#reportView iframe");
 
-    // Switch the dashboard tab
-    vizObj.switchDashboardTabByIndex(tabIndex);
-}
+        // Do nothing if the iframe hasn't been created yet
+        if (!reportIframe) {
+            return;
+        }
+
+        if (currentActiveTabId === 'IdxTab0') {
+            // ANRF tab: Set fixed height
+            reportIframe.style.height = fixedHeight;
+        } else {
+            // Other tabs: Set dynamic height as you requested
+            const dynamicHeight = window.innerHeight - 30;
+            reportIframe.style.height = dynamicHeight + 'px';
+        }
+    }
+
+    // --- NEW ---
+    // Add a resize listener to update the height if the window changes size
+    // This is crucial for the dynamic height tabs
+    window.addEventListener('resize', setReportHeight);
+
+
+    function onTabClick(tabId) {
+        const tabIsVsNameMap = {
+            'tab0': "ANRF",
+            'tab1': "Central University",
+            'tab2': "Institute of National Importance",
+            'tab3': "Weekly Patent Application Granted",
+            'tab4': "Weekly Patent Application Published",
+            'tab5': "ANRF MAIN"
+        }
+        const tabName = tabIsVsNameMap[tabId];
+        if(!tabName) {
+            return;
+        }
+        // Find the clicked element and set it as active
+        const clickedElement = document.querySelector(`.anrf-tab[data-tab="${tabId}"]`);
+        setActiveTab(clickedElement);
+
+        vizObj.switchDashboardTabByName(tabName);
+    }
+
+    // --- MODIFIED FUNCTION ---
+    function onTabClickByIndex(tabId) {
+        const tabIdVsIndexMap = {
+            'IdxTab0': 0,
+            'IdxTab1': 1,
+            'IdxTab2': 2,
+            'IdxTab3': 3,
+            'IdxTab4': 4,
+            'IdxTab5': 5
+        };
+        const tabIndex = tabIdVsIndexMap[tabId];
+
+        if (tabIndex === undefined) {
+            return;
+        }
+
+        // --- ADDED ---
+        // Store the tabId of the one that was just clicked
+        currentActiveTabId = tabId;
+
+        const clickedElement = document.querySelector(`.anrf-tab[data-tab-index="${tabId}"]`);
+        setActiveTab(clickedElement);
+
+        // --- ADDED ---
+        // Call our new function to update the iframe's height
+        setReportHeight();
+
+        // Switch the dashboard tab
+        vizObj.switchDashboardTabByIndex(tabIndex);
+    }
 
     document.addEventListener('DOMContentLoaded', function() {
         const menuItems = document.querySelectorAll('.zrop-menu-item.zrop-has-submenu');
