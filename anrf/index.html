@@ -521,7 +521,10 @@
 .anrf-logo {
   font-size: 22px;
   font-weight: 800;
-  pointer-events: none;
+  cursor: pointer;
+}
+.anrf-logo:hover {
+    color: #000000;
 }
 .anrf-footer {
   background-color: #f8f9fa;
@@ -598,6 +601,14 @@ ul.zrop-menu-subgroup {
   padding: 0 50px;
 }
 
+.anrf-menu-txt {
+    background: linear-gradient(to right, #2E3540 25%, #5881C1 61%, #E9A125 86%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
     </style>
 </head>
 <body>
@@ -669,11 +680,9 @@ ul.zrop-menu-subgroup {
                             <ul class="zrop-submenu">
                             <li>
                                 <button class="anrf-tab" data-tab-index="IdxTab1" onclick="onTabClickByIndex('IdxTab1')">Central University</button>
-                                <!-- <a href="#" class="ramki"></a> -->
                             </li>
                             <li>
                                 <button class="anrf-tab" data-tab-index="IdxTab2" onclick="onTabClickByIndex('IdxTab2')">Institute of National Importance</button>
-                                <!-- <a href="#" class="ramki"></a> -->
                             </li>
                             </ul>
                         </li>
@@ -694,8 +703,8 @@ ul.zrop-menu-subgroup {
                     </ul>
                 </li>
                 <li class="zrop-menu-item anrf-logo">
-                    <a data-tab-index="IdxTab" onclick="onTabClickByIndex('IdxTab')">
-                        <span>AN<span style="color:#476EAD;">R</span><span style="color:#F5B131;">F</span></span>
+                    <a data-tab-index="IdxTab0" onclick="onTabClickByIndex('IdxTab0')">
+                        <span class="anrf-menu-txt">ANRF</span></span>
                     </a>
                 </li>
 
@@ -778,7 +787,7 @@ ul.zrop-menu-subgroup {
 
 function onTabClick(tabId) {
     const tabIsVsNameMap = {
-        'tab': "ANRF",
+        'tab0': "ANRF",
         'tab1': "Central University",
         'tab2': "Institute of National Importance",
         'tab3': "Weekly Patent Application Granted",
@@ -798,7 +807,7 @@ function onTabClick(tabId) {
 
 function onTabClickByIndex(tabId) {
     const tabIdVsIndexMap = { // Renamed for clarity
-        'IdxTab': 0,
+        'IdxTab0': 0,
         'IdxTab1': 1,
         'IdxTab2': 2,
         'IdxTab3': 3,
