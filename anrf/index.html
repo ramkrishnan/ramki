@@ -493,7 +493,7 @@
   margin: 0;
   z-index: 999;
   min-width: 100%;
-  max-height: 40vh;
+  max-height: 30vh;
   overflow-y: auto;
   border-radius: 5px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
@@ -707,7 +707,8 @@ ul.zrop-menu-subgroup {
                             <a href="https://www.istem.gov.in/" target="_blank" class="anrf-tab">Scientific Infrastructure</a>
                         </li>
                         <li class="zrop-menu-item zrop-has-submenu">
-                            <a href=" https://analytics.zoho.in/open-view/465348000000008392" target="_blank" class="anrf-tab">Find Expert</a>
+                            <button class="anrf-tab" data-tab-index="IdxTab5" onclick="onTabClickByIndex('IdxTab5')">Find Expert</button>
+                            <!-- <a href=" https://analytics.zoho.in/open-view/465348000000008392" target="_blank" class="anrf-tab">Find Expert</a> -->
                         </li>
                         <li class="zrop-menu-item zrop-has-submenu">
                             <button class="anrf-tab anrf-tab-newsFeed">
@@ -765,26 +766,24 @@ ul.zrop-menu-subgroup {
 
 
         function setActiveTab(clickedTab) {
-    // 1. Remove 'active' class from ALL tab buttons/links
     const allTabs = document.querySelectorAll('.anrf-tab');
     allTabs.forEach(tab => {
         tab.classList.remove('active');
     });
 
-    // 2. Add 'active' class to the specific tab that was clicked
     if (clickedTab) {
         clickedTab.classList.add('active');
     }
 }
 
-// This function is not used by your current HTML, but is here for future use
 function onTabClick(tabId) {
     const tabIsVsNameMap = {
         'tab': "ANRF",
         'tab1': "Central University",
         'tab2': "Institute of National Importance",
-        'tab3': "Weekly Patent Application Published",
-        'tab5': "Weekly Patent Application Granted"
+        'tab3': "Weekly Patent Application Granted",
+        'tab4': "Weekly Patent Application Published",
+        'tab5': "ANRF MAIN"
     }
     const tabName = tabIsVsNameMap[tabId];
     if(!tabName) {
@@ -803,7 +802,8 @@ function onTabClickByIndex(tabId) {
         'IdxTab1': 1,
         'IdxTab2': 2,
         'IdxTab3': 3,
-        'IdxTab4': 4
+        'IdxTab4': 4,
+        'IdxTab5': 5
     };
     const tabIndex = tabIdVsIndexMap[tabId];
 
