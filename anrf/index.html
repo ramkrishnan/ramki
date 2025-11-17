@@ -42,12 +42,97 @@
         }
         body {
             margin: 0;
+            font-family: 'Zoho_Puvi_Regular';
+        }
+
+        .slider-container {
+            width: 100%;
+            max-height: 450px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .slider-wrapper {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .slide {
+            flex: 0 0 100%;
+            width: 100%;
+            height: 450px;
+        }
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        .slider-btn:hover {
+            background-color: rgba(255, 255, 255, 1);
+        }
+        .slider-btn:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+        .slider-btn.prev-btn {
+            left: 16px;
+        }
+        .slider-btn.next-btn {
+            right: 16px;
+        }
+        .slider-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke-width: 3;
+            color: #333;
+        }
+        .slider-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            z-index: 10;
+        }
+        .dot {
+            width: 10px;
+            height: 10px;
+            margin: 0 6px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        .dot.active {
+            background-color: #ffffff;
+            transform: scale(1.2);
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+        }
+
+
+
+        .slider-wrapper {
+            height: 100%;
         }
         .anrf-banner {
             background: linear-gradient(to right, #112854 44%, #1290FF 100%);
-        }
-        .anrf-banner__content {
-            padding: 40px 0 65px;
         }
         .anrf-logo-section {
             margin: 0;
@@ -55,6 +140,7 @@
         }
         .anrf-logo-section img {
             max-width: 300px;
+            height: auto;
         }
         .anrf-header__title {
             color: #ffffff;
@@ -63,7 +149,7 @@
             font-weight: bold;
             line-height: 40px;
             margin: 0;
-            padding-top: 20px;
+            padding-top: 70px;
             text-align: center;
         }
         .anrf-title__green {
@@ -97,16 +183,114 @@
         .anrf-banner__content {
             display: flex;
             flex-direction: column;
+            padding: 40px 0 65px;
             background-image: url('images/banner-center-img.png');
             background-repeat: no-repeat;
             background-size: auto 250px;
             background-position: 45% 0%;
+            height: 100%;
         }
         .anrf-banner__header {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
+
+        .rdi-banner {
+            background: #ff7c04 url(images/main-head-bg.png) 50% 50% no-repeat;
+            background-size: cover;
+        }
+
+        .slider-rdi-banner-section, .slider-pm-banner-section {
+            display: flex;
+            justify-content: space-between;
+            height: 100%;
+            margin-right: auto;
+            margin-left: auto;
+            box-sizing: border-box;
+        }
+        .slider-rdi-lt-section {
+            display: flex;
+            flex-direction: column;
+            flex: 2;
+            align-self: stretch;
+        }
+        .slider-rdi-lt-section h2 {
+            margin: 20px 0 0;
+            font-weight: 300;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #000000;
+        }
+        .slider-rdi-lt-section p {
+            font-style: italic;
+            line-height: 26px;
+            font-size: 16px;
+        }
+        .slider-rdi-pm {
+            font-size: 16px;
+            font-family: 'Zoho_Puvi_Semibold';
+            line-height: 26px;
+            font-style: italic;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .slider-rdi-rt-section {
+            flex: 1;
+            align-self: flex-end;
+        }
+
+        .slider-rdi-rt-section img {
+            max-width: 100%;
+            height: auto;
+            max-height: 450px;
+            display: flex;
+        }
+        .rdi-logo img {
+            margin-top: 10px;
+            width: 200px;
+        }
+
+
+        .pm-banner {
+            background: linear-gradient(to right, #c58142, #8d4400);
+        }
+        .slider-pm-img-section {
+            flex: 1;
+            background: url(images/PM.png) left bottom no-repeat;
+            width: 100%;
+            height: 100%;
+            background-size: contain;
+        }
+        .slider-pm-quote {
+            flex: 1;
+            margin-left: -200px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-self: center;
+        }
+        .slider-pm-quote span {
+            color: #fff;
+            font-size: 16px;
+            line-height: 32px;
+            font-style: italic;
+        }
+        .slider-pm-quote span.slider-quote-head {
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .slider-pm-banner-section {
+            margin: 0 25px;
+        }
+        .slider-rdi-desc h2 {
+            display: inline-flex;
+        }
+
+
+
+
+
+        
         .anrf-wave-labels {
             list-style: none;
             display: flex;
@@ -453,6 +637,11 @@
                 margin-block-end: 150px;
             }
         }
+        @media screen and (min-width: 1600px) {
+            .slider-rdi-banner-section {
+                max-width: 1360px;
+            }
+        }
 
 .zrop-menu {
   list-style: none;
@@ -598,6 +787,36 @@ ul.zrop-menu-subgroup {
     -webkit-text-fill-color: transparent;
     color: transparent;
 }
+
+
+.slider-rdi-lt-section,
+.slider-pm-img-section {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.slider-rdi-rt-section,
+.slider-pm-quote {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.slide.active-slide .slider-rdi-lt-section,
+.slide.active-slide .slider-pm-img-section {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.2s;
+}
+
+.slide.active-slide .slider-rdi-rt-section,
+.slide.active-slide .slider-pm-quote {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.4s;
+}
+
 @media only screen and (max-width: 980px) {
     .anrf-footer ul {
         gap: 50px;
@@ -611,7 +830,7 @@ ul.zrop-menu-subgroup {
     </style>
 </head>
 <body>
-    <header class="banner">
+    <!-- <header class="banner">
         <div class="anrf-banner">
             <div class="anrf-banner__bg">
                 <div class="anrf-banner__content">
@@ -627,7 +846,86 @@ ul.zrop-menu-subgroup {
                 </div>
             </div>
         </div>
-    </header>
+    </header> -->
+    <div class="slider-container">
+        <div class="slider-wrapper">
+            
+            <!-- Slide 1 -->
+            <div class="slide anrf-banner">
+                <header class="banner">
+                    <div class="anrf-banner__content">
+                        <div class="anrf-logo-section">
+                            <img src="images/logo.svg" />
+                        </div>
+                        <div class="anrf-banner__header">
+                            <h1 class="anrf-header__title">
+                                <span class="anrf-title__green">ANU</span>SANDHAN <span class="anrf-title__green">MA</span>STER <span class="anrf-title__green">P</span>LATFORM OF <span class="anrf-title__green">I</span>NDIAN <br><span class="anrf-title__yellow">RESEARCH AND INNOVATION</span>
+                            </h1>
+                            <h2 class="anrf-header__desc anrf-title__green">ANUMAPI</h2>
+                        </div>
+                    </div>
+                </header>
+            </div>
+            
+            <!-- Slide 2 -->
+            <div class="slide rdi-banner">
+                <header>
+                    <div class="slider-rdi-banner-section rdi-banner-bg">
+                        <div class="slider-rdi-lt-section">
+                            <a class="rdi-logo">
+								<img alt="" src="images/RDI-Logo.png">
+							</a>
+                            <h2>
+                                Research Development and Innovation Fund(RDIF)
+                            </h2>
+                            <p>Research Development and Innovation (RDI) Scheme will be a game changer in the world of research and innovation. This scheme, with a corpus of Rs. 1 lakh crore will have a major impact on emerging and sunrise sectors. It will also boost private sector participation in the world of R&D.</p>
+                            <div class="slider-rdi-pm">
+                                <span>Shri Narendra Modi <br>Hon’ble Prime Minister</span>
+                            </div>
+                            
+                            <div class="slider-rdi-desc">
+                                <h2>About RDIF</h2>
+                                <p>In a transformative step of bolster India’s research and innovation ecosystem, the Union Cabinet, chaired by Hon’ble Prime Minsiter, has approved the Research Development and Innovation (RDI) Scheme with a corpus of Rs. One lakh Crore.</p>
+                            </div>
+                        </div>
+                        <div class="slider-rdi-rt-section">
+                            <img src="images/banner-3.png" alt="">
+                        </div>
+                    </div>
+                </header>
+            </div>
+            
+            <!-- Slide 3 -->
+            <div class="slide pm-banner">
+                <div class="slider-pm-banner-section">
+                    <div class="slider-pm-img-section">
+                    
+                    </div>
+                    <div class="slider-pm-quote">
+                        <span class="slider-quote-head">
+                            “The scientific community of the country should have faith that there will be no dearth of resources for their endeavours.”
+                        </span>
+                        <span>
+                            — Hon’ble Prime Minister, 10 September 2024, in the first meeting of the Governing Board of the Anusandhan National Research Foundation (ANRF)
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+
+        <button class="slider-btn prev-btn" aria-label="Previous slide">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <button class="slider-btn next-btn" aria-label="Next slide">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+
+        <div class="slider-dots">
+        </div>
+    </div>
+
 
     <div class="anrf-news-wrapper">
   <span class="anrf-news-label">What’s new</span>
@@ -789,31 +1087,21 @@ ul.zrop-menu-subgroup {
             clickedTab.classList.add('active');
         }
     }
-
-    // --- NEW FUNCTION ---
-    // This function finds the iframe and sets its height based on the active tab
     function setReportHeight() {
-        // The Zoho lib creates an iframe inside your 'reportView' div
         const reportIframe = document.querySelector("#reportView iframe");
 
-        // Do nothing if the iframe hasn't been created yet
         if (!reportIframe) {
             return;
         }
 
         if (currentActiveTabId === 'IdxTab0') {
-            // ANRF tab: Set fixed height
             reportIframe.style.height = fixedHeight;
         } else {
-            // Other tabs: Set dynamic height as you requested
             const dynamicHeight = window.innerHeight - 30;
             reportIframe.style.height = dynamicHeight + 'px';
         }
     }
 
-    // --- NEW ---
-    // Add a resize listener to update the height if the window changes size
-    // This is crucial for the dynamic height tabs
     window.addEventListener('resize', setReportHeight);
 
 
@@ -830,14 +1118,12 @@ ul.zrop-menu-subgroup {
         if(!tabName) {
             return;
         }
-        // Find the clicked element and set it as active
         const clickedElement = document.querySelector(`.anrf-tab[data-tab="${tabId}"]`);
         setActiveTab(clickedElement);
 
         vizObj.switchDashboardTabByName(tabName);
     }
 
-    // --- MODIFIED FUNCTION ---
     function onTabClickByIndex(tabId) {
         const tabIdVsIndexMap = {
             'IdxTab0': 0,
@@ -853,18 +1139,13 @@ ul.zrop-menu-subgroup {
             return;
         }
 
-        // --- ADDED ---
-        // Store the tabId of the one that was just clicked
         currentActiveTabId = tabId;
 
         const clickedElement = document.querySelector(`.anrf-tab[data-tab-index="${tabId}"]`);
         setActiveTab(clickedElement);
 
-        // --- ADDED ---
-        // Call our new function to update the iframe's height
         setReportHeight();
 
-        // Switch the dashboard tab
         vizObj.switchDashboardTabByIndex(tabIndex);
     }
 
@@ -887,6 +1168,176 @@ ul.zrop-menu-subgroup {
                 }
             });
         });
+
+
+        const sliderContainer = document.querySelector('.slider-container');
+            const sliderWrapper = document.querySelector('.slider-wrapper');
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            const dotsContainer = document.querySelector('.slider-dots');
+
+            let currentIndex = 0;
+            const slideCount = slides.length;
+            let dots = [];
+
+            const autoSlideInterval = 7000; // Timer
+            let autoSlideTimer;
+            let autoPlayEnabled = true;
+
+            function init() {
+                for (let i = 0; i < slideCount; i++) {
+                    const dot = document.createElement('span');
+                    dot.classList.add('dot');
+                    dot.setAttribute('data-slide', i);
+                    // dot.addEventListener('click', () => goToSlide(i));
+                    dot.addEventListener('click', () => {
+                        autoPlayEnabled = false;
+                        stopAutoSlide();
+                        goToSlide(i);
+                    });
+                    dotsContainer.appendChild(dot);
+                    dots.push(dot);
+                }
+                goToSlide(0);
+                startAutoSlide();
+            }
+
+            // function goToSlide(index) {
+            //     if (index < 0) {
+            //         index = slideCount - 1;
+            //     } else if (index >= slideCount) {
+            //         index = 0;
+            //     }
+            //     sliderWrapper.style.transform = `translateX(-${index * 100}%)`;
+            //     currentIndex = index;
+            //     updateUI();
+            // }
+
+            function goToSlide(index) {
+                if (index < 0) {
+                    index = slideCount - 1;
+                } else if (index >= slideCount) {
+                    index = 0;
+                }
+                sliderWrapper.style.transform = `translateX(-${index * 100}%)`;
+                currentIndex = index;
+                updateUI();
+
+                // --- ADDED CODE START ---
+                // Remove 'active-slide' class from all slides
+                slides.forEach(slide => {
+                    slide.classList.remove('active-slide');
+                });
+
+                // Add 'active-slide' class to the current slide
+                if (slides[currentIndex]) {
+                    slides[currentIndex].classList.add('active-slide');
+                }
+                // --- ADDED CODE END ---
+            }
+
+            function updateUI() {
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentIndex);
+                });
+            }
+            nextBtn.addEventListener('click', () => {
+                goToSlide(currentIndex + 1);
+                autoPlayEnabled = true;
+                resetAutoSlide();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                goToSlide(currentIndex - 1);
+                autoPlayEnabled = true;
+                resetAutoSlide();
+            });
+
+            let isDragging = false;
+            let startX = 0;
+            let currentTranslate = 0;
+            let dragThreshold = 50;
+
+            sliderWrapper.addEventListener('mousedown', startDrag);
+            sliderWrapper.addEventListener('touchstart', startDrag);
+
+            sliderWrapper.addEventListener('mousemove', drag);
+            sliderWrapper.addEventListener('touchmove', drag);
+
+            sliderWrapper.addEventListener('mouseup', endDrag);
+            sliderWrapper.addEventListener('touchend', endDrag);
+            sliderWrapper.addEventListener('mouseleave', endDrag);
+
+            function startDrag(e) {
+                stopAutoSlide();
+
+                if (e.type === 'touchstart') {
+                    startX = e.touches[0].clientX;
+                } else {
+                    startX = e.clientX;
+                    e.preventDefault(); 
+                }
+                isDragging = true;
+                sliderWrapper.style.transition = 'none';
+                currentTranslate = -currentIndex * sliderContainer.offsetWidth;
+            }
+
+            function drag(e) {
+                if (!isDragging) return;
+
+                let currentX = 0;
+                if (e.type === 'touchmove') {
+                    currentX = e.touches[0].clientX;
+                } else {
+                    currentX = e.clientX;
+                }
+                const diff = currentX - startX;
+                sliderWrapper.style.transform = `translateX(${currentTranslate + diff}px)`;
+            }
+
+            function endDrag(e) {
+                if (!isDragging) return;
+                isDragging = false;
+                sliderWrapper.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1)';
+                startAutoSlide();
+
+                const endX = (e.type === 'touchend' || e.type === 'touchcancel') ? e.changedTouches[0].clientX : e.clientX;
+                const diff = endX - startX;
+
+                if (Math.abs(diff) > dragThreshold) {
+                    if (diff < 0) {
+                        goToSlide(currentIndex + 1);
+                    } else {
+                        goToSlide(currentIndex - 1);
+                    }
+                } else {
+                    goToSlide(currentIndex);
+                }
+            }
+
+            sliderWrapper.querySelectorAll('img').forEach(img => {
+                img.addEventListener('dragstart', (e) => e.preventDefault());
+            });
+
+            function startAutoSlide() {
+                if (!autoPlayEnabled) return;
+                stopAutoSlide();
+                autoSlideTimer = setInterval(() => {
+                    goToSlide(currentIndex + 1);
+                }, autoSlideInterval);
+            }
+
+            function stopAutoSlide() {
+                clearInterval(autoSlideTimer);
+            }
+
+            function resetAutoSlide() {
+                if (!autoPlayEnabled) return;   
+                stopAutoSlide();
+                startAutoSlide();
+            }
+            init();
     });
 </script>
 </body>
