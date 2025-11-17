@@ -689,12 +689,7 @@ ul.zrop-menu-subgroup {
                                 
                             <li>
                                 <button class="anrf-tab" data-tab-index="IdxTab3" onclick="onTabClickByIndex('IdxTab3')">Patent Application Published</button>
-                                <!-- <a href="#" class="ramki"></a> -->
                             </li> 
-                            <!-- <li> -->
-                                <!-- <button class="anrf-tab" data-tab-index="IdxTab4" onclick="onTabClickByIndex('IdxTab4')">Patent Application Published</button> -->
-                                <!-- <a href="#" class="ramki"></a> -->
-                            <!-- </li> -->
                             </ul>
                         </li>
 
@@ -714,8 +709,16 @@ ul.zrop-menu-subgroup {
                             <a href="https://www.istem.gov.in/" target="_blank" class="anrf-tab">Scientific Infrastructure</a>
                         </li>
                         <li class="zrop-menu-item zrop-has-submenu">
-                            <button class="anrf-tab" data-tab-index="IdxTab5" onclick="onTabClickByIndex('IdxTab5')">Find Expert</button>
-                            <!-- <a href=" https://analytics.zoho.in/open-view/465348000000008392" target="_blank" class="anrf-tab">Find Expert</a> -->
+                            <button aria-haspopup="true" aria-expanded="false" class="anrf-tab">Expert & Researchers</button>
+                            <ul class="zrop-submenu">
+                                
+                            <li>
+                                <button class="anrf-tab" data-tab-index="IdxTab4" onclick="onTabClickByIndex('IdxTab4')">Expert</button>
+                            </li> 
+                            <li>
+                                <button class="anrf-tab" data-tab-index="IdxTab5" onclick="onTabClickByIndex('IdxTab5')">Researchers</button>
+                            </li>
+                            </ul>
                         </li>
                         <li class="zrop-menu-item zrop-has-submenu">
                             <button class="anrf-tab anrf-tab-newsFeed">
@@ -820,8 +823,8 @@ ul.zrop-menu-subgroup {
             'tab1': "Central University",
             'tab2': "Institute of National Importance",
             'tab3': "Weekly Patent Application Granted",
-            'tab4': "Weekly Patent Application Published",
-            'tab5': "ANRF MAIN"
+            'tab4': "ANRF MAIN",
+            'tab5': "Researcher"
         }
         const tabName = tabIsVsNameMap[tabId];
         if(!tabName) {
