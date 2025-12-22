@@ -978,13 +978,16 @@ ul.zrop-menu-subgroup {
                             </ul>
                         </li>
                         <li class="zrop-menu-item zrop-has-submenu">
-                            <button class="anrf-tab">Institutions of Higher Learning</button>
+                            <button class="anrf-tab">Institutes</button>
                             <ul class="zrop-submenu">
                             <li>
                                 <button class="anrf-tab" data-tab-index="IdxTab1" onclick="onTabClickByIndex('IdxTab1')">Central University</button>
                             </li>
                             <li>
                                 <button class="anrf-tab" data-tab-index="IdxTab2" onclick="onTabClickByIndex('IdxTab2')">Institute of National Importance</button>
+                            </li>
+                            <li>
+                                <button class="anrf-tab" data-tab-index="IdxTab6" onclick="onTabClickByIndex('IdxTab6')">R&D Institutions</button>
                             </li>
                             </ul>
                         </li>
@@ -1123,7 +1126,8 @@ ul.zrop-menu-subgroup {
             'tab2': "Institute of National Importance",
             'tab3': "Weekly Patent Application Granted",
             'tab4': "ANRF MAIN",
-            'tab5': "Researcher"
+            'tab5': "Researcher",
+            'tab6': "R&D"
         }
         const tabName = tabIsVsNameMap[tabId];
         if(!tabName) {
@@ -1142,7 +1146,8 @@ ul.zrop-menu-subgroup {
             'IdxTab2': 2,
             'IdxTab3': 3,
             'IdxTab4': 4,
-            'IdxTab5': 5
+            'IdxTab5': 5,
+            'IdxTab6': 6
         };
         const tabIndex = tabIdVsIndexMap[tabId];
 
@@ -1349,6 +1354,49 @@ ul.zrop-menu-subgroup {
                 startAutoSlide();
             }
             init();
+
+
+
+            async function loadAnnouncements() {
+            const newsContainer = document.querySelector('.anrf-news-content');
+            const apiUrl = "https://prism.serbonline.in/Announcements";
+            const apiKey = "Gk5Lq1Rb8Nz3TdV9YpXm"; 
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-SECRET-KEY': apiKey
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log("API Data received:", data);
+                newsContainer.innerHTML = '';
+                data.forEach(item => {
+                    const span = document.createElement('span');
+                    span.className = 'anrf-news-item';
+                    
+                    const link = document.createElement('a');
+                    link.target = "_blank";
+                    link.href = item.Link || item.url || '#'; 
+                    link.textContent = item.Announcement || item.title || 'News Item'; 
+                    
+                    span.appendChild(link);
+                    newsContainer.appendChild(span);
+                });
+
+            } catch (error) {
+                console.error("Failed to load news:", error);
+            }
+        }
+
+        loadAnnouncements();
     });
 </script>
 </body>
