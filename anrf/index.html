@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://downloads.zohocdn.com/zanalyticslib/jsapi/v1.0.1/zanalytics.min.js"></script>
+    <title>ANRF</title>
+    <link rel="preload" href="https://static.zohocdn.com/zohofonts/zohopuvi/4.0/Zoho_Puvi_Regular.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="preload" href="https://fonts.zohostatic.com/zohopuvi/3.5/zoho_puvi_bold.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="preload" href="https://fonts.zohostatic.com/zohopuvi/3.5/zoho_puvi_extrabold.woff2" as="font" type="font/woff2" crossorigin="">
+    <style>
+        @font-face {
+            font-family: 'Zoho_Puvi_Regular';
+            src: url('https://static.zohocdn.com/zohofonts/zohopuvi/4.0/Zoho_Puvi_Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Zoho_Puvi_Bold';
+            src: url('https://fonts.zohostatic.com/zohopuvi/3.5/zoho_puvi_bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Zoho_Puvi_ExtraBold';
+            src: url('https://fonts.zohostatic.com/zohopuvi/3.5/zoho_puvi_extrabold.woff2') format('woff2');
+            font-weight: 800;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Zoho_Puvi_Semibold';
+            src: url('https://static.zohocdn.com/zohofonts/zohopuvi/4.0/Zoho_Puvi_Semibold.woff2') format('woff2');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        }
+        body {
+            margin: 0;
+            font-family: 'Zoho_Puvi_Regular';
+        }
+
+        .slider-container {
+            width: 100%;
+            max-height: 450px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .slider-wrapper {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .slide {
+            flex: 0 0 100%;
+            width: 100%;
+            height: 450px;
+        }
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        .slider-btn:hover {
+            background-color: rgba(255, 255, 255, 1);
+        }
+        .slider-btn:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+        .slider-btn.prev-btn {
+            left: 16px;
+        }
+        .slider-btn.next-btn {
+            right: 16px;
+        }
+        .slider-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke-width: 3;
+            color: #333;
+        }
+        .slider-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            z-index: 10;
+        }
+        .dot {
+            width: 10px;
+            height: 10px;
+            margin: 0 6px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        .dot.active {
+            background-color: #ffffff;
+            transform: scale(1.2);
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+        }
+
+
+
+        .slider-wrapper {
+            height: 100%;
+        }
+        .anrf-banner {
+            background: linear-gradient(to right, #112854 44%, #1290FF 100%);
+        }
+        .anrf-logo-section {
+            margin: 0;
+            padding-left: 40px;
+        }
+        .anrf-logo-section img {
+            max-width: 450px;
+            height: auto;
+        }
+        .anrf-header__title {
+            color: #ffffff;
+            font-family: 'Zoho_Puvi_ExtraBold', sans-serif;
+            font-size: 42px;
+            font-weight: bold;
+            line-height: 50px;
+            margin: 0;
+            padding-top: 70px;
+            text-align: center;
+        }
+        .anrf-title__green {
+                color: #9FD681;
+        }
+        .anrf-title__yellow {
+                color: #FFC849;
+        }
+        .anrf-header__desc {
+            font-family: 'Zoho_Puvi_Bold', sans-serif;
+            font-size: 35px;
+            font-weight: bold;
+            font-style: italic;
+            margin: 0;
+            padding-top: 20px;
+            text-align: center;
+        }
+        .anrf-rt-section {
+            position: relative;
+            flex-grow: 1;
+            
+        }
+        .anrf-rt-section::before {
+            content: '';
+            position: absolute;
+            z-index: 3;
+            width: 100%;
+            height: 100%;
+            background: url('images/right-img.svg') right bottom no-repeat;
+        }
+        .anrf-banner__content {
+            display: flex;
+            flex-direction: column;
+            padding: 40px 0 65px;
+            background-image: url('images/banner-center-img.png');
+            background-repeat: no-repeat;
+            background-size: auto 250px;
+            background-position: 45% 0%;
+            height: 100%;
+        }
+        .anrf-banner__header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .rdi-banner {
+            background: #ff7c04 url(images/main-head-bg.png) 50% 50% no-repeat;
+            background-size: cover;
+        }
+
+        .slider-rdi-banner-section, .slider-pm-banner-section {
+            display: flex;
+            justify-content: space-between;
+            height: 100%;
+            margin-right: auto;
+            margin-left: auto;
+            box-sizing: border-box;
+        }
+        .slider-rdi-lt-section {
+            display: flex;
+            flex-direction: column;
+            flex: 2;
+            align-self: stretch;
+        }
+        .slider-rdi-lt-section h2 {
+            margin: 20px 0 0;
+            font-weight: 300;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #000000;
+        }
+        .slider-rdi-lt-section p {
+            font-style: italic;
+            line-height: 26px;
+            font-size: 16px;
+        }
+        .slider-rdi-pm {
+            font-size: 16px;
+            font-family: 'Zoho_Puvi_Semibold';
+            line-height: 26px;
+            font-style: italic;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .slider-rdi-rt-section {
+            flex: 1;
+            align-self: flex-end;
+        }
+
+        .slider-rdi-rt-section img {
+            max-width: 100%;
+            height: auto;
+            max-height: 450px;
+            display: flex;
+        }
+        .rdi-logo img {
+            margin-top: 10px;
+            width: 200px;
+        }
+
+
+        .pm-banner {
+            background: linear-gradient(to right, #c58142, #8d4400);
+        }
+        .slider-pm-img-section {
+            flex: 1;
+            position: relative;
+            z-index: 10;
+            background: url(images/PM.png) left bottom no-repeat;
+            width: 100%;
+            height: 100%;
+            background-size: contain;
+        }
+        .slider-pm-quote {
+            flex: 1;
+            margin-left: -200px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-self: center;
+        }
+        .slider-pm-quote span {
+            color: #fff;
+            font-size: 16px;
+            line-height: 32px;
+            font-style: italic;
+        }
+        .slider-pm-quote span.slider-quote-head {
+            color: #fdffa8;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .slider-pm-banner-section {
+            margin: 0 25px;
+        }
+        .slider-rdi-desc h2 {
+            display: inline-flex;
+        }
+
+
+
+
+
+        
+        .anrf-wave-labels {
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+            align-items: self-end;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        .anrf-wave-labels li {
+            color: #ffffff;
+            font-family: 'Zoho_Puvi_Regular', sans-serif;
+            font-size: 12px;
+            text-align: center;
+            line-height: 1.3;
+            pointer-events: auto;
+        }
+        .anrf-wave-labels li::after {
+            content: "";
+            display: block;
+            width: 4px;
+            height: 60px;
+            margin: 8px auto 0;
+            background: linear-gradient(to bottom,
+                #DCCBCB 0%,
+                #FFC776 36%,
+                transparent 100%
+            );
+        }
+        .anrf-wave-labels li:hover::after {
+            content: "";
+            display: block;
+            width: 4px;
+            height: 60px;
+            margin: 8px auto 0;
+            background: linear-gradient(to bottom,
+                #DCCBCB 0%,
+                #9FD681 36%,
+                transparent 100%
+            );
+        }
+        .anrf-wave-labels li a {
+            color: #ffffff;
+            text-decoration: none;
+            cursor: pointer;
+            position: relative;
+            z-index: 5;
+        }
+        .anrf-wave-labels li a:hover {
+            color: #FFC849;
+        }
+
+
+
+
+
+        .anrf-font-gradient {
+            margin: 10px 20px;
+        }
+        .anrf-news-wrapper {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            background: #e9e9ec;
+            font-family: 'Zoho_Puvi_Regular';
+            padding: 20px 0px 20px 20px;
+            position: relative;
+            z-index: 10;
+        }
+        .anrf-news-label {
+            font-family: 'Zoho_Puvi_ExtraBold', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            color: #78328B;
+            margin-right: 10px;
+            white-space: nowrap;
+        }
+        .anrf-news-container {
+            overflow: hidden;
+            flex: 1;
+            position: relative;
+        }
+        .anrf-news-track {
+            display: inline-block;
+            white-space: nowrap;
+        }
+        .anrf-news-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: scroll-left 25s linear infinite;
+            animation-play-state: running;
+        }
+        .anrf-news:hover .anrf-news-content,
+        .anrf-news-content:hover,
+        .anrf-news-content:focus-within {
+            animation-play-state: paused;
+        }
+        .anrf-news-item {
+            display: inline-block;
+            padding-right: 60px;
+        }
+        .anrf-news-item a {
+            font-family: 'Zoho_Puvi_Semibold';
+            color: #324775;
+            text-decoration: none;
+            position: relative;
+            white-space: nowrap;
+            padding-left: 15px;
+        }
+        .anrf-news-item a::before{
+            content:"";
+            position:absolute;
+            inset-block-start: 50%;
+            inset-inline-start: 0;
+            transform: translateY(-50%);
+            inline-size: 0;
+            block-size: 0;
+            border-block-start: 4px solid transparent;
+            border-block-end: 4px solid transparent;
+            border-inline-start: 6px solid #324775;
+            pointer-events:none;
+            transition: opacity .2s;
+        }
+
+        .anrf-news-item a:hover::before,
+        .anrf-news-item a:focus-visible::before{
+            opacity:.8;
+        }
+
+            /* RTL support */
+        [dir="rtl"] .anrf-news-item a::before{
+            border-inline-start: 0;
+            border-inline-end: 8px solid #324775;
+            inset-inline-start: auto;
+            inset-inline-end: 0;
+        }
+        
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .anrf-tab-wrapper {
+            background-color:#ffffff;
+            border:1px solid #d4d4d4;
+        }
+        .anrf-tab-holder {
+            display: flex;
+            gap: 20px;
+            padding: 0 30px;
+            height: auto;
+            align-items: flex-end;
+            justify-content: space-between;
+            overflow: visible;
+            border-bottom: 1px solid #dddddd;
+        }
+        .tab-container {
+            font-family: Arial, sans-serif;
+            width: 100%;
+            padding: 0;
+        }
+        .anrf-tabs {
+            display: flex;
+        }
+        .anrf-tab:not(img) {
+            flex: 1;
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+            background-color: #ffffff;
+            border: none;
+            outline: none;
+            font-family: 'Zoho_Puvi_ExtraBold', sans-serif;
+            font-size: 14px;
+            color: #4c4c4c;
+            line-height: 1.5;
+            transition: background-color 0.3s;
+        }
+        .zrop-menu-item.zrop-has-submenu {
+            text-align: center !important;
+            display: flex;
+            align-items: center;
+        }
+        .anrf-tab.anrf-tab-newsFeed {
+            cursor: default;
+        }
+        .anrf-tab:not(img):hover {
+            background-color: #e0e0e0;
+        }
+        .anrf-tab:not(img).active {
+            color: #0E65C3;
+            background-color: #fff;
+            border-bottom: 2px solid #007BFF;
+            font-weight: bold;
+        }
+        img.anrf-tab {
+            cursor: pointer;
+        }
+        .social-icons {
+            display: none;
+            padding: 10px;
+            justify-content: center;
+            border-radius: 4px;
+            gap: 12px;
+        }
+        .social-icons img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            cursor: pointer;
+        }
+        .anrf-tab-newsFeed:hover .social-icons img {
+            cursor: pointer;
+        }
+        .anrf-tab-newsFeed {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            transition: transform 0.3s ease;
+        }
+        .anrf-tab-newsFeed:hover .social-icons, .anrf-tab-newsFeed:hover .anrf-arrow-separator {
+            display: flex;
+        }
+        .anrf-arrow-separator {
+            display: none;
+            width: 6px;
+            height: 6px;
+            border-right: 2px solid #333;
+            border-top: 2px solid #333;
+            transform: rotate(45deg);
+            margin-inline-start: 10px;
+            transition: opacity 0.3s ease;
+        }
+        .anrf-button-label {
+            word-break: keep-all;
+            white-space: nowrap;
+        }
+        .anrf-tab-newsFeed:hover .anrf-button-label {
+            margin-inline-start: 10px;
+        }
+        .anrf-wave-labels {
+            justify-content: flex-start;
+            gap: 40px;
+        }
+        .anrf-rt-section {
+            flex: 0 0 57%;
+            margin-left: -5%;
+        }
+        .anrf-wave-labels {
+            margin-inline: calc(6% + 70px) 50px;
+        }
+        .anrf-wave-labels li:nth-child(1) {
+            margin-block-end: 60px;
+        }
+        .anrf-wave-labels li:nth-child(2) {
+            margin-block-end: 125px;
+        }
+        .anrf-wave-labels li:nth-child(3) {
+            margin-block-end: 130px;
+        }
+        .anrf-wave-labels li:nth-child(4) {
+            margin-block-end: 145px;
+        }
+        .anrf-wave-labels li:nth-child(5) {
+            margin-block-end: 185px;
+        }
+
+        @media (max-width: 768px) {
+            .anrf-rt-section {
+             display: none;
+            }
+            .anrf-font-gradient {
+                display: none;
+            }
+            .anrf-lt-section {
+                padding: 20px 30px;
+            }
+            .anrf-news-wrapper {
+                padding: 20px 0px 20px 20px;
+            }
+            .anrf-tab-holder {
+                margin: 0 20px;
+            }
+            .anrf-header__title, .anrf-header__desc {
+                text-align: center;
+            }
+            .anrf-news-label {
+                margin-left: -15px;
+            }
+        }
+        @media (max-width: 870px) {
+            .slider-rdi-rt-section, .slider-pm-img-section {
+                display: none;
+            }
+            .slider-pm-quote {
+                margin-left: 0px;
+            }
+        }
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .anrf-lt-section {
+                padding: 40px 50px 0;
+            }
+            .anrf-news-wrapper {
+                padding: 20px 0px 20px 20px;
+            }
+            .anrf-tab-holder {
+                margin: 0 20px;
+            }
+            .anrf-banner__content {
+                flex-direction: column;
+            }
+            .anrf-wave-labels {
+                justify-content: space-evenly;
+                gap: 40px;
+            }
+            .anrf-wave-labels li:nth-child(1) {
+                margin-block-end: 50px;
+            }
+            .anrf-wave-labels li:nth-child(2) {
+                margin-block-end: 125px;
+            }
+            .anrf-wave-labels li:nth-child(3) {
+                margin-block-end: 130px;
+            }
+            .anrf-wave-labels li:nth-child(4) {
+                margin-block-end: 145px;
+            }
+            .anrf-wave-labels li:nth-child(5) {
+                margin-block-end: 185px;
+            }
+        }
+        @media (min-width: 1025px) and (max-width: 1440px) {
+            body .anrf-footer ul {
+                gap: 30px;
+                height: 35px;
+            }
+            .slider-rdi-lt-section {
+                margin-left: 20px;
+            }
+        }
+        @media screen and (min-width: 1600px) {
+            .slider-rdi-banner-section {
+                max-width: 1360px;
+            }
+        }
+
+.zrop-menu {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background: #fff;
+  font-family: 'Zoho_Puvi_ExtraBold', sans-serif;
+}
+
+.zrop-menu-item {
+  position: relative;
+}
+.zrop-menu-item > a {
+    text-decoration: none;
+}
+.zrop-menu-item a.anrf-tab, .zrop-menu-item button.anrf-tab {
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+}
+.zrop-menu-item button.anrf-tab.anrf-tab-newsFeed:hover {
+    padding: 3px;
+}
+.zrop-menu-item > a:hover {
+  color: #0078D7;
+  background-color: transparent;
+}
+.zrop-submenu {
+  position: absolute;
+  display: none;
+  top: 100%;
+  left: 0;
+  list-style: none;
+  background: #fff;
+  padding: 0;
+  margin: 0;
+  z-index: 999;
+  min-width: 100%;
+  max-height: 30vh;
+  overflow-y: auto;
+  border-radius: 5px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.zrop-menu-item > .zrop-submenu.flip {
+    top: auto;
+    bottom: 100%;
+}
+.zrop-menu-item:hover > .zrop-submenu {
+  display: block;
+}
+.zrop-submenu li a, .zrop-submenu li button {
+  display: block;
+  padding: 15px;
+  font-size: 14px;
+  text-decoration: none;
+  color: #333;
+  white-space: nowrap;
+  font-weight: normal;
+}
+.zrop-submenu li a:hover {
+  background-color: #f0f0f0;
+}
+.anrf-logo {
+  font-size: 22px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.anrf-logo:hover {
+    color: #000000;
+}
+.anrf-footer {
+  background-color: #f8f9fa;
+  padding: 30px 20px;
+  border-top: 1px solid #e0e0e0;
+  margin-top: 20px;
+}
+
+.anrf-footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 100px;
+}
+
+.anrf-footer img {
+  height: 45px;
+  max-width: 180px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: all 0.3s ease-in-out;
+}
+.anrf-footer .anrf-footer-logo img {
+    max-width: 250px;
+}
+
+.anrf-footer a:hover img {
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.zrop-menu-group {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+ul.zrop-menu-subgroup {
+    list-style-type: none;
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-around;
+    padding: 0;
+}
+
+.zrop-menu-left {
+  justify-content: flex-start; 
+}
+
+.zrop-menu-right {
+  justify-content: flex-end; 
+}
+
+.anrf-logo {
+  flex: 0 0 auto; 
+  padding: 0 50px;
+}
+
+.anrf-menu-txt {
+    background: linear-gradient(to right, #2E3540 25%, #5881C1 61%, #E9A125 86%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+.anrf-logo-section.anrf-logo-pm {
+    display: flex;
+    position: relative;
+}
+.anrf-logo-section.anrf-logo-pm img {
+    position: absolute;
+    top: 40px;
+    transform: scale(0.8) translateX(-80px);
+}
+
+.slider-rdi-lt-section,
+.slider-pm-img-section,
+.anrf-banner__header {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.slider-rdi-rt-section,
+.slider-pm-quote {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.slide.active-slide .slider-rdi-lt-section,
+.slide.active-slide .slider-pm-img-section,
+.slide.active-slide .anrf-banner__header {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.2s;
+}
+
+.slide.active-slide .slider-rdi-rt-section,
+.slide.active-slide .slider-pm-quote {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.4s;
+}
+
+@media only screen and (max-width: 980px) {
+    .anrf-footer ul {
+        gap: 50px;
+    }
+    .anrf-footer img {
+        height: 35px;
+        max-width: 150px;
+    }
+}
+
+.anrf-tab-wrapper {
+    border: none;
+}
+
+.anrf-tab-holder {
+    display: none !important;
+}
+
+#reportView {
+    margin-top: -15px;
+}
+    </style>
+</head>
+<body>
+    <!-- <header class="banner">
+        <div class="anrf-banner">
+            <div class="anrf-banner__bg">
+                <div class="anrf-banner__content">
+                    <div class="anrf-logo-section">
+                        <img src="images/logo.svg" />
+                    </div>
+                    <div class="anrf-banner__header">
+                        <h1 class="anrf-header__title">
+                            <span class="anrf-title__green">ANU</span>SANDHAN <span class="anrf-title__green">MA</span>STER <span class="anrf-title__green">P</span>LATFORM OF <span class="anrf-title__green">I</span>NDIAN <br><span class="anrf-title__yellow">RESEARCH AND INNOVATION</span>
+                        </h1>
+                        <h2 class="anrf-header__desc anrf-title__green">ANUMAPI</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header> -->
+    <div class="slider-container">
+        <div class="slider-wrapper">
+            
+            <!-- Slide 1 -->
+            <div class="slide anrf-banner">
+                <header class="banner">
+                    <div class="anrf-banner__content">
+                        <div class="anrf-logo-section">
+                            <img src="images/logo.svg" />
+                        </div>
+                        <div class="anrf-banner__header">
+                            <h1 class="anrf-header__title">
+                                <span class="anrf-title__green">ANU</span>SANDHAN <span class="anrf-title__green">MA</span>STER <span class="anrf-title__green">P</span>LATFORM OF <span class="anrf-title__green">I</span>NDIAN <br><span class="anrf-title__yellow">RESEARCH AND INNOVATION</span>
+                            </h1>
+                            <h2 class="anrf-header__desc anrf-title__green">ANUMAPI</h2>
+                        </div>
+                    </div>
+                </header>
+            </div>
+            
+            <!-- Slide 2 -->
+            <div class="slide rdi-banner">
+                <header>
+                    <div class="slider-rdi-banner-section rdi-banner-bg">
+                        <div class="slider-rdi-lt-section">
+                            <a class="rdi-logo">
+								<img alt="" src="images/RDI-Logo.png">
+							</a>
+                            <h2>
+                                Research Development and Innovation Fund(RDIF)
+                            </h2>
+                            <p>Research Development and Innovation (RDI) Scheme will be a game changer in the world of research and innovation. This scheme, with a corpus of Rs. 1 lakh crore will have a major impact on emerging and sunrise sectors. It will also boost private sector participation in the world of R&D.</p>
+                            <div class="slider-rdi-pm">
+                                <span>Shri Narendra Modi <br>Hon’ble Prime Minister</span>
+                            </div>
+                            
+                            <div class="slider-rdi-desc">
+                                <h2>About RDIF</h2>
+                                <p>In a transformative step of bolster India’s research and innovation ecosystem, the Union Cabinet, chaired by Hon’ble Prime Minsiter, has approved the Research Development and Innovation (RDI) Scheme with a corpus of Rs. One lakh Crore.</p>
+                            </div>
+                        </div>
+                        <div class="slider-rdi-rt-section">
+                            <img src="images/banner-3.png" alt="">
+                        </div>
+                    </div>
+                </header>
+            </div>
+            
+            <!-- Slide 3 -->
+            <div class="slide pm-banner">
+                <div class="anrf-logo-section anrf-logo-pm">
+                        <img src="images/logo.svg" />
+                    </div>
+                <div class="slider-pm-banner-section">
+                    <div class="slider-pm-img-section">
+                    
+                    </div>
+                    <div class="slider-pm-quote">
+                        <span class="slider-quote-head">
+                            “The scientific community of the country should have faith that there will be no dearth of resources for their endeavours.”
+                        </span>
+                        <span>
+                            — Hon’ble Prime Minister, 10 September 2024, in the first meeting of the Governing Board of the Anusandhan National Research Foundation (ANRF)
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+
+        <button class="slider-btn prev-btn" aria-label="Previous slide">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <button class="slider-btn next-btn" aria-label="Next slide">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+
+        <div class="slider-dots">
+        </div>
+    </div>
+
+
+    <div class="anrf-news-wrapper">
+  <span class="anrf-news-label">What’s new</span>
+  <div class="anrf-news-container">
+    <div class="anrf-news-track">
+      <div class="anrf-news-content">
+        <span class="anrf-news-item"><a target="_blank" href="https://www.indiascienceandtechnology.gov.in/programme-schemes/research-and-development/anrf-prime-minister-professorship-program">ANRF- Prime Minister Professorship Program (Last Date to Apply: 1 Sept. 2025)</a></span>
+        <span class="anrf-news-item"><a target="_blank" href="https://www.inspireawards-dst.gov.in/">INSPIRE-MANAK Call for Nominations for Students’ Technological Ideas/Innovations (Last date to Apply: 15th September 2025)</a></span>
+        <span class="anrf-news-item"><a target="_blank" href="https://www.indiascienceandtechnology.gov.in/internships/nif-student-internship-programme-scouting-and-documentation-grassroots-innovations-gris">NIF-Student Internship Programme for Scouting and Documentation of Grassroots Innovations (GRIs)</a></span>
+        <span class="anrf-news-item"><a target="_blank" href="https://www.indiascienceandtechnology.gov.in/conferences-and-seminars/symposium/manotsava-2025-neuroscience-research-symposium-last-date-register-7th-september-2025">Manotsava 2025: Neuroscience Research Symposium (Last Date to Register: 7th September 2025)</a></span>
+        <span class="anrf-news-item"><a target="_blank" href="https://www.indiascienceandtechnology.gov.in/nurturing-minds/scholarships/iit-bombay-institute-post-doctoral-fellowship-ipdf">IIT Bombay- Institute Post- Doctoral Fellowship (IPDF)</a></span>
+        <span class="anrf-news-item"><a target="_blank" href="https://www.indiascienceandtechnology.gov.in/nurturing-minds/scholarships/graduation/call-chanakya-fellowship-open-last-date-apply-21st-september-2025">Call for CHANAKYA Fellowship is open (Last Date to Apply: 21st September 2025)</a></span>
+        <span class="anrf-news-item"><a target="_blank" href="https://www.indiascienceandtechnology.gov.in/programme-schemes/human-resource-and-development/star-college-scheme">Star College Scheme</a></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="anrf-tab-wrapper">
+    <div class="anrf-tab-holder">
+      <div class="option tab-container" name='dashboardOptions' style="flex: 1;">
+          <nav class="zrop-nav" role="navigation" aria-label="Main Navigation">
+            <ul class="zrop-menu">
+                <li class="zrop-menu-group zrop-menu-left">
+                    <ul class="zrop-menu-subgroup">
+
+                        <li class="zrop-menu-item zrop-has-submenu">
+                            <button class="anrf-tab">Ministries & Departments</button>
+                            <ul class="zrop-submenu" >
+                            <li><a href="https://drdo.gov.in/drdo/" target="_blank">Defence Research and Development Organisation (DRDO)</a></li>
+                            <li><a href="https://dae.gov.in/" target="_blank">Department of Atomic Energy (DAE)</a></li>
+                            <li><a href="https://www.dsir.gov.in/" target="_blank">Department of Scientific & Industrial Research (DSIR)</a></li>
+                            <li><a href="https://dbtindia.gov.in/" target="_blank">Department of Biotechnology (DBT)</a></li>
+                            <li><a href="https://dst.gov.in/" target="_blank">Department of Science and Technology (DST)</a></li>
+                            <li><a href="https://dbtyas-sports.gov.in/" target="_blank">Department of Space (DoS)</a></li>
+                            <li><a href="https://www.icar.org.in/" target="_blank">Indian Council of Agricultural Research (ICAR)</a></li>
+                            <li><a href="https://www.icmr.gov.in/" target="_blank">Indian Council of Medical Research (ICMR)</a></li>
+                            <li><a href="https://moes.gov.in/" target="_blank">Ministry of Earth Sciences (MoES)</a></li>
+                            <li><a href="https://www.education.gov.in/" target="_blank">Ministry of Education (MoE)</a></li>
+                            <li><a href="https://www.meity.gov.in/" target="_blank">Ministry of Electronics and Information Technology (MeitY)</a></li>
+                            <li><a href="https://moef.gov.in/" target="_blank">Ministry of Environment, Forest and Climate Change (MoEF & CC)</a></li>
+                            <li><a href="https://mnre.gov.in/" target="_blank">Ministry of New and Renewable Energy (MNRE)</a></li>
+                            </ul>
+                        </li>
+                        <li class="zrop-menu-item zrop-has-submenu">
+                            <button class="anrf-tab">Institutes</button>
+                            <ul class="zrop-submenu">
+                            <li>
+                                <button class="anrf-tab" data-tab-index="IdxTab1" onclick="onTabClickByIndex('IdxTab1')">Central University</button>
+                            </li>
+                            <li>
+                                <button class="anrf-tab" data-tab-index="IdxTab2" onclick="onTabClickByIndex('IdxTab2')">Institute of National Importance</button>
+                            </li>
+                            <li>
+                                <button class="anrf-tab" data-tab-index="IdxTab6" onclick="onTabClickByIndex('IdxTab6')">R&D Institutions</button>
+                            </li>
+                            </ul>
+                        </li>
+                        <li class="zrop-menu-item zrop-has-submenu">
+                            <button aria-haspopup="true" aria-expanded="false" class="anrf-tab">Innovation</button>
+                            <ul class="zrop-submenu">
+                                
+                            <li>
+                                <button class="anrf-tab" data-tab-index="IdxTab3" onclick="onTabClickByIndex('IdxTab3')">Patent Application Published</button>
+                            </li> 
+                            </ul>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="zrop-menu-item anrf-logo">
+                    <a data-tab-index="IdxTab0" onclick="onTabClickByIndex('IdxTab0')">
+                        <span class="anrf-menu-txt">ANRF</span></span>
+                    </a>
+                </li>
+
+                <li class="zrop-menu-group zrop-menu-right">
+                    <ul class="zrop-menu-subgroup">
+
+
+                        <li class="zrop-menu-item zrop-has-submenu">
+                            <a href="https://www.istem.gov.in/" target="_blank" class="anrf-tab">Scientific Infrastructure</a>
+                        </li>
+                        <li class="zrop-menu-item zrop-has-submenu">
+                            <button aria-haspopup="true" aria-expanded="false" class="anrf-tab">Expert & Researchers</button>
+                            <ul class="zrop-submenu">
+                                
+                            <li>
+                                <button class="anrf-tab" data-tab-index="IdxTab4" onclick="onTabClickByIndex('IdxTab4')">Expert</button>
+                            </li> 
+                            <li>
+                                <button class="anrf-tab" data-tab-index="IdxTab5" onclick="onTabClickByIndex('IdxTab5')">Researchers</button>
+                            </li>
+                            </ul>
+                        </li>
+                        <li class="zrop-menu-item zrop-has-submenu">
+                            <button class="anrf-tab anrf-tab-newsFeed">
+                        <span class="anrf-button-label">News feed</span>
+                        <span class="anrf-arrow-separator"></span>
+                        <div class="social-icons">
+                            <a rel="noopener" href="https://www.facebook.com/anrfindia" target="blank" title="Follow on Facebook"><img src="images/facebook.png" alt="Facebook" /></a>
+                            <a rel="noopener" href="https://x.com/anrfindia" target="blank" title="Follow on Facebook"><img src="images/x.png" alt="X" /></a>
+                            <a rel="noopener" href="https://www.linkedin.com/in/anusandhan-national-research-foundation-anrf/" target="blank" title="Follow on linkedin"><img src="images/linkedin.png" alt="LinkedIn" /></a>
+                            <a rel="noopener" href="https://www.instagram.com/anrfindia/" target="blank" title="Follow on Instagram"><img src="images/instagram.png" alt="Instagram" /></a>
+                            </div>
+                        </button>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            </nav>
+      </div>
+    </div>
+    <div id="reportView"></div>
+</div>
+<div class="anrf-footer">
+    <ul>
+        <li>
+            <a href="https://shodhganga.inflibnet.ac.in" target="_blank"><img src="images/footer_logo/shodhganga.gif" /></a>
+        </li>
+        <li>
+            <a href="https://www.data.gov.in/" target="_blank"><img src="images/footer_logo/data.gov.svg" /></a>
+        </li>
+        <li class="anrf-footer-logo">
+            <a href="https://www.anrfonline.in/ANRF/HomePage" target="_blank"><img src="images/footer_logo/anrf.png" /></a>
+        </li>
+        <li>
+            <a href="https://irins.org/" target="_blank"><img src="images/footer_logo/irins.png" /></a>
+        </li>
+        <li>
+            <a href="https://aishe.gov.in/" target="_blank"><img src="images/footer_logo/aishe.png" /></a>
+        </li>
+        <li>
+            <a href="https://rdifund.anrf.gov.in/" target="_blank"><img src="images/footer_logo/RDI-Logo.png" /></a>
+        </li>
+    </ul>
+</div>
+
+
+<script>
+    const reportDiv = document.getElementById("reportView");
+
+    // Directly load SINGLE dashboard view
+    const reportUrl = "https://analytics.zoho.in/open-view/465348000000691362/edf3e7cc47756862b3bea96bf136d2ae3f41a1fae95324b4f91825396c04addb";
+
+    const reportOptions = {
+        width: '100%',
+        height: '2850',
+        defaultConfig: {
+            hideDashboardTab: true
+        }
+    };
+
+    const vizObj = new ZAnalyticsLib(reportDiv, reportUrl, reportOptions);
+    vizObj.createViz();
+
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // -----------------------------
+        // SLIDER LOGIC
+        // -----------------------------
+        const sliderContainer = document.querySelector('.slider-container');
+        const sliderWrapper = document.querySelector('.slider-wrapper');
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        const dotsContainer = document.querySelector('.slider-dots');
+
+        let currentIndex = 0;
+        const slideCount = slides.length;
+        let dots = [];
+
+        const autoSlideInterval = 7000;
+        let autoSlideTimer;
+        let autoPlayEnabled = true;
+
+        function init() {
+            for (let i = 0; i < slideCount; i++) {
+                const dot = document.createElement('span');
+                dot.classList.add('dot');
+                dot.setAttribute('data-slide', i);
+
+                dot.addEventListener('click', () => {
+                    autoPlayEnabled = false;
+                    stopAutoSlide();
+                    goToSlide(i);
+                });
+
+                dotsContainer.appendChild(dot);
+                dots.push(dot);
+            }
+
+            goToSlide(0);
+            startAutoSlide();
+        }
+
+        function goToSlide(index) {
+            if (index < 0) {
+                index = slideCount - 1;
+            } else if (index >= slideCount) {
+                index = 0;
+            }
+
+            sliderWrapper.style.transform = `translateX(-${index * 100}%)`;
+
+            currentIndex = index;
+
+            updateUI();
+
+            slides.forEach(slide => {
+                slide.classList.remove('active-slide');
+            });
+
+            if (slides[currentIndex]) {
+                slides[currentIndex].classList.add('active-slide');
+            }
+        }
+
+        function updateUI() {
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentIndex);
+            });
+        }
+
+        nextBtn.addEventListener('click', () => {
+            goToSlide(currentIndex + 1);
+            autoPlayEnabled = true;
+            resetAutoSlide();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            goToSlide(currentIndex - 1);
+            autoPlayEnabled = true;
+            resetAutoSlide();
+        });
+
+        let isDragging = false;
+        let startX = 0;
+        let currentTranslate = 0;
+        let dragThreshold = 50;
+
+        sliderWrapper.addEventListener('mousedown', startDrag);
+        sliderWrapper.addEventListener('touchstart', startDrag);
+
+        sliderWrapper.addEventListener('mousemove', drag);
+        sliderWrapper.addEventListener('touchmove', drag);
+
+        sliderWrapper.addEventListener('mouseup', endDrag);
+        sliderWrapper.addEventListener('touchend', endDrag);
+        sliderWrapper.addEventListener('mouseleave', endDrag);
+
+        function startDrag(e) {
+            stopAutoSlide();
+
+            if (e.type === 'touchstart') {
+                startX = e.touches[0].clientX;
+            } else {
+                startX = e.clientX;
+                e.preventDefault();
+            }
+
+            isDragging = true;
+            sliderWrapper.style.transition = 'none';
+            currentTranslate = -currentIndex * sliderContainer.offsetWidth;
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
+
+            let currentX = 0;
+
+            if (e.type === 'touchmove') {
+                currentX = e.touches[0].clientX;
+            } else {
+                currentX = e.clientX;
+            }
+
+            const diff = currentX - startX;
+
+            sliderWrapper.style.transform =
+                `translateX(${currentTranslate + diff}px)`;
+        }
+
+        function endDrag(e) {
+            if (!isDragging) return;
+
+            isDragging = false;
+
+            sliderWrapper.style.transition =
+                'transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1)';
+
+            startAutoSlide();
+
+            const endX =
+                (e.type === 'touchend' || e.type === 'touchcancel')
+                    ? e.changedTouches[0].clientX
+                    : e.clientX;
+
+            const diff = endX - startX;
+
+            if (Math.abs(diff) > dragThreshold) {
+                if (diff < 0) {
+                    goToSlide(currentIndex + 1);
+                } else {
+                    goToSlide(currentIndex - 1);
+                }
+            } else {
+                goToSlide(currentIndex);
+            }
+        }
+
+        sliderWrapper.querySelectorAll('img').forEach(img => {
+            img.addEventListener('dragstart', (e) => e.preventDefault());
+        });
+
+        function startAutoSlide() {
+            if (!autoPlayEnabled) return;
+
+            stopAutoSlide();
+
+            autoSlideTimer = setInterval(() => {
+                goToSlide(currentIndex + 1);
+            }, autoSlideInterval);
+        }
+
+        function stopAutoSlide() {
+            clearInterval(autoSlideTimer);
+        }
+
+        function resetAutoSlide() {
+            if (!autoPlayEnabled) return;
+
+            stopAutoSlide();
+            startAutoSlide();
+        }
+
+        init();
+
+        // -----------------------------
+        // LOAD ANNOUNCEMENTS
+        // -----------------------------
+        async function loadAnnouncements() {
+
+            const newsContainer =
+                document.querySelector('.anrf-news-content');
+
+            const apiUrl = "https://prism.serbonline.in/Announcements";
+
+            const apiKey = "Gk5Lq1Rb8Nz3TdV9YpXm";
+
+            try {
+
+                const response = await fetch(apiUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-SECRET-KEY': apiKey
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(
+                        `HTTP error! status: ${response.status}`
+                    );
+                }
+
+                const data = await response.json();
+
+                console.log("API Data received:", data);
+
+                newsContainer.innerHTML = '';
+
+                data.forEach(item => {
+
+                    const span = document.createElement('span');
+
+                    span.className = 'anrf-news-item';
+
+                    const link = document.createElement('a');
+
+                    link.target = "_blank";
+
+                    link.href =
+                        item.Link ||
+                        item.url ||
+                        '#';
+
+                    link.textContent =
+                        item.Announcement ||
+                        item.title ||
+                        'News Item';
+
+                    span.appendChild(link);
+
+                    newsContainer.appendChild(span);
+                });
+
+            } catch (error) {
+
+                console.error(
+                    "Failed to load news:",
+                    error
+                );
+            }
+        }
+
+        loadAnnouncements();
+
+    });
+</script>
+</body>
+</html>
